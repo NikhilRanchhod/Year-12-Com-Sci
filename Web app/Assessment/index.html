@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile App</title>
+    <link rel="stylesheet" href="stylesmobile.css">
+</head>
+
+<body>
+    <h1 class="pagetitle">Smart Attendance Scanner</h1>
+    <main class="scannerpage">
+        <video id="cameraFeed" autoplay playsinline muted></video>
+        <button id="enableCameraBtn" class="camera-button">Enable Camera</button>
+
+        <script>
+            const enableCameraBtn = document.getElementById('enableCameraBtn');
+            const cameraFeed = document.getElementById('cameraFeed');
+            let isCameraOn = false;
+
+            enableCameraBtn.addEventListener('click', async () => {
+                if (isCameraOn) {
+                    // Turn off camera
+                    const stream = cameraFeed.srcObject;
+                    const tracks = stream.getTracks();
+                    tracks.forEach(track => track.stop());
+                    cameraFeed.srcObject = null;
+                    enableCameraBtn.textContent = 'Enable Camera';
+                    enableCameraBtn.disabled = false;
+                    isCameraOn = false;
+                } else {
+                    // Turn on camera
+                    try {
+                        const stream = await navigator.mediaDevices.getUserMedia({
+                            video: { facingMode: 'environment' }
+                        });
+                        cameraFeed.srcObject = stream;
+                        enableCameraBtn.textContent = 'Disable Camera';
+                        isCameraOn = true;
+                    } catch (error) {
+                        console.error('Error accessing camera:', error);
+                        alert('Unable to access camera. Please check permissions.');
+                    }
+                }
+            });
+        </script>
+ 
+
+
+
+
+        </script>
+
+    </main>
+</body>
