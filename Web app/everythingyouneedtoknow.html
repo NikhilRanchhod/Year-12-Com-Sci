@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+/>
+
+<title>
+Responsive Design Playground
+</title>
+
+<link
+  rel="preconnect"
+  href="https://fonts.googleapis.com"
+/>
+
+<link
+  rel="preconnect"
+  href="https://fonts.gstatic.com"
+  crossorigin
+/>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+  rel="stylesheet"
+/>
+
+<style>
+
+/* ========================================= */
+/* ROOT VARIABLES */
+/* ========================================= */
+
+:root{
+
+  --bg:#060816;
+  --card:#101827;
+  --card2:#162033;
+  --border:#22304a;
+
+  --text:#f8fafc;
+  --muted:#94a3b8;
+
+  --primary:#7c3aed;
+  --secondary:#06b6d4;
+  --accent:#2563eb;
+
+}
+
+/* ========================================= */
+/* LIGHT MODE */
+/* ========================================= */
+
+body.light{
+
+  --bg:#f3f6fb;
+  --card:#ffffff;
+  --card2:#ffffff;
+  --border:#dbe4f0;
+
+  --text:#0f172a;
+  --muted:#475569;
+
+  --primary:#7c3aed;
+  --secondary:#0891b2;
+  --accent:#2563eb;
+
+}
+
+/* ========================================= */
+/* GLOBAL */
+/* ========================================= */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+
+  font-family:'Inter',sans-serif;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(124,58,237,0.15),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(6,182,212,0.12),
+      transparent 30%
+    ),
+    var(--bg);
+
+  color:var(--text);
+
+  overflow-x:hidden;
+
+  transition:
+    background 0.35s,
+    color 0.35s;
+
+}
+
+/* ========================================= */
+/* FLOATING VIEWPORT PANEL */
+/* ========================================= */
+
+.topbar{
+
+  position:fixed;
+
+  top:20px;
+  right:20px;
+
+  width:280px;
+
+  z-index:9999;
+
+  background:
+    rgba(15,23,42,0.8);
+
+  backdrop-filter:blur(20px);
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+
+  border-radius:24px;
+
+  padding:18px;
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.4);
+
+}
+
+.topbar h3{
+  margin-bottom:12px;
+}
+
+.slider{
+
+  width:100%;
+
+  appearance:none;
+
+  height:8px;
+
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #06b6d4,
+      #7c3aed
+    );
+
+}
+
+.slider::-webkit-slider-thumb{
+
+  appearance:none;
+
+  width:22px;
+  height:22px;
+
+  border-radius:50%;
+
+  background:white;
+
+  border:4px solid #7c3aed;
+
+  cursor:pointer;
+
+}
+
+.meta{
+
+  margin-top:12px;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+}
+
+.badge{
+
+  background:#7c3aed;
+
+  padding:8px 14px;
+
+  border-radius:999px;
+
+  font-size:0.8rem;
+
+  font-weight:700;
+
+}
+
+.width{
+
+  color:var(--secondary);
+
+  font-weight:700;
+
+}
+
+.theme-btn{
+
+  width:100%;
+
+  margin-top:14px;
+
+}
+
+/* ========================================= */
+/* HERO */
+/* ========================================= */
+
+.hero{
+
+  padding:120px 30px 60px;
+
+  text-align:center;
+
+}
+
+.hero h1{
+
+  font-size:
+    clamp(3rem,6vw,6rem);
+
+  line-height:1;
+
+  margin-bottom:24px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ffffff,
+      #7c3aed,
+      #06b6d4
+    );
+
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+
+}
+
+.hero p{
+
+  max-width:900px;
+
+  margin:auto;
+
+  color:var(--muted);
+
+  line-height:1.8;
+
+  font-size:1.1rem;
+
+}
+
+/* ========================================= */
+/* PREVIEW */
+/* ========================================= */
+
+.preview-wrap{
+
+  display:flex;
+
+  justify-content:center;
+
+  padding:40px;
+
+}
+
+.preview{
+
+  width:375px;
+
+  transition:0.35s ease;
+
+  border-radius:32px;
+
+  overflow:hidden;
+
+  background:var(--card2);
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+
+  min-height:100vh;
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.35);
+
+}
+
+.preview-inner{
+  padding:30px;
+}
+
+/* ========================================= */
+/* GRID */
+/* ========================================= */
+
+.grid{
+
+  display:grid;
+
+  grid-template-columns:1fr;
+
+  gap:24px;
+
+}
+
+@media(min-width:1000px){
+
+  .grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+}
+
+/* ========================================= */
+/* CARD */
+/* ========================================= */
+
+.card{
+
+  background:var(--card);
+
+  border:
+    1px solid var(--border);
+
+  border-radius:28px;
+
+  overflow:hidden;
+
+  transition:0.35s;
+
+}
+
+.card:hover{
+
+  transform:translateY(-4px);
+
+  border-color:
+    rgba(124,58,237,0.45);
+
+}
+
+.card-header{
+
+  padding:22px 24px;
+
+  border-bottom:
+    1px solid rgba(255,255,255,0.06);
+
+}
+
+.card-body{
+  padding:24px;
+}
+
+.card-body p{
+
+  color:var(--muted);
+
+  line-height:1.8;
+
+  margin-bottom:18px;
+
+}
+
+/* ========================================= */
+/* BUTTONS */
+/* ========================================= */
+
+.controls{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:10px;
+
+  margin-bottom:20px;
+
+}
+
+button{
+
+  border:none;
+
+  background:
+    linear-gradient(
+      135deg,
+      #7c3aed,
+      #2563eb
+    );
+
+  color:white;
+
+  padding:12px 18px;
+
+  border-radius:14px;
+
+  cursor:pointer;
+
+  font-weight:700;
+
+  transition:0.3s;
+
+}
+
+button:hover{
+  transform:translateY(-2px);
+}
+
+/* ========================================= */
+/* FLEXBOX */
+/* ========================================= */
+
+.flex-demo{
+
+  display:flex;
+
+  gap:12px;
+
+  flex-wrap:wrap;
+
+  transition:0.3s;
+
+}
+
+.flex-item{
+
+  flex:1;
+
+  min-width:100px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #7c3aed,
+      #2563eb
+    );
+
+  padding:24px;
+
+  border-radius:18px;
+
+  text-align:center;
+
+  font-weight:800;
+
+}
+
+/* ========================================= */
+/* GRID DEMO */
+/* ========================================= */
+
+.grid-demo{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:12px;
+
+}
+
+.grid-item{
+
+  background:
+    linear-gradient(
+      135deg,
+      #06b6d4,
+      #2563eb
+    );
+
+  padding:24px;
+
+  border-radius:18px;
+
+  text-align:center;
+
+  font-weight:800;
+
+}
+
+/* ========================================= */
+/* RESPONSIVE LAYOUT */
+/* ========================================= */
+
+.responsive-layout{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:14px;
+
+}
+
+.responsive-card{
+
+  background:#172554;
+
+  padding:22px;
+
+  border-radius:18px;
+
+}
+
+@media(min-width:768px){
+
+  .responsive-layout{
+    flex-direction:row;
+  }
+
+}
+
+/* ========================================= */
+/* CODE BOX */
+/* ========================================= */
+
+.code{
+
+  margin-top:22px;
+
+  background:#020617;
+
+  border-radius:20px;
+
+  overflow:hidden;
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+
+}
+
+.code-top{
+
+  padding:12px 18px;
+
+  background:#0f172a;
+
+  border-bottom:
+    1px solid rgba(255,255,255,0.06);
+
+  color:var(--muted);
+
+  font-size:0.85rem;
+
+}
+
+pre{
+
+  overflow:auto;
+
+  padding:20px;
+
+}
+
+code{
+
+  color:#cbd5e1;
+
+  line-height:1.8;
+
+  font-family:
+    "Fira Code",
+    monospace;
+
+}
+
+/* ========================================= */
+/* COMMENT */
+/* ========================================= */
+
+.comment{
+
+  margin-top:18px;
+
+  padding:16px;
+
+  border-radius:16px;
+
+  background:
+    rgba(6,182,212,0.08);
+
+  border:
+    1px solid rgba(6,182,212,0.18);
+
+  line-height:1.8;
+
+  color:#cbd5e1;
+
+}
+
+.comment strong{
+  color:#06b6d4;
+}
+
+/* ========================================= */
+/* IMAGE */
+/* ========================================= */
+
+.image{
+
+  width:100%;
+
+  border-radius:20px;
+
+  transition:0.35s;
+
+}
+
+.image:hover{
+  transform:scale(1.02);
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ========================================= -->
+<!-- VIEWPORT CONTROLLER -->
+<!-- ========================================= -->
+
+<div class="topbar">
+
+  <h3>
+    Viewport Simulator
+  </h3>
+
+  <input
+    type="range"
+    min="320"
+    max="1600"
+    value="375"
+    class="slider"
+    id="slider"
+  />
+
+  <div class="meta">
+
+    <div
+      class="badge"
+      id="device"
+    >
+      iPhone
+    </div>
+
+    <div
+      class="width"
+      id="width"
+    >
+      375px
+    </div>
+
+  </div>
+
+  <button
+    class="theme-btn"
+    id="themeToggle"
+    onclick="toggleTheme()"
+  >
+    Toggle Light Mode
+  </button>
+
+</div>
+
+<!-- ========================================= -->
+<!-- HERO -->
+<!-- ========================================= -->
+
+<section class="hero">
+
+  <h1>
+    Responsive Design Playground
+  </h1>
+
+  <p>
+    Resize the viewport and interact with
+    responsive layouts, media queries,
+    typography, flexbox, grid systems,
+    responsive images, and live code examples.
+  </p>
+
+</section>
+
+<!-- ========================================= -->
+<!-- PREVIEW -->
+<!-- ========================================= -->
+
+<div class="preview-wrap">
+
+<div
+  class="preview"
+  id="preview"
+>
+
+<div class="preview-inner">
+
+<div class="grid">
+
+<!-- ========================================= -->
+<!-- MEDIA QUERY -->
+<!-- ========================================= -->
+
+<div class="card">
+
+<div class="card-header">
+<h2>Media Queries</h2>
+</div>
+
+<div class="card-body">
+
+<p>
+Resize the viewport slider to see
+the layout adapt live.
+</p>
+
+<div
+  class="responsive-layout"
+  id="responsiveLayout"
+>
+
+<div class="responsive-card">
+Card 1
+</div>
+
+<div class="responsive-card">
+Card 2
+</div>
+
+<div class="responsive-card">
+Card 3
+</div>
+
+</div>
+
+<div class="code">
+
+<div class="code-top">
+Live Media Query Code
+</div>
+
+<pre><code id="mediaCode"></code></pre>
+
+</div>
+
+<div class="comment">
+
+<strong>Assessment Standard:</strong>
+
+Media queries allow websites to adapt
+their layout and styling for different
+screen sizes and devices.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- FLEXBOX -->
+<!-- ========================================= -->
+
+<div class="card">
+
+<div class="card-header">
+<h2>Flexbox</h2>
+</div>
+
+<div class="card-body">
+
+<div class="controls">
+
+<button onclick="setRow()">
+Row
+</button>
+
+<button onclick="setColumn()">
+Column
+</button>
+
+<button onclick="toggleWrap()">
+Wrap
+</button>
+
+</div>
+
+<div
+  class="flex-demo"
+  id="flexDemo"
+>
+
+<div class="flex-item">1</div>
+<div class="flex-item">2</div>
+<div class="flex-item">3</div>
+<div class="flex-item">4</div>
+
+</div>
+
+<div class="code">
+
+<div class="code-top">
+Live Flexbox Code
+</div>
+
+<pre><code id="flexCode"></code></pre>
+
+</div>
+
+<div class="comment">
+
+<strong>Assessment Standard:</strong>
+
+Flexbox is used for arranging and aligning
+elements efficiently in responsive layouts.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- GRID -->
+<!-- ========================================= -->
+
+<div class="card">
+
+<div class="card-header">
+<h2>CSS Grid</h2>
+</div>
+
+<div class="card-body">
+
+<div class="controls">
+
+<button onclick="setGrid(2)">
+2 Col
+</button>
+
+<button onclick="setGrid(3)">
+3 Col
+</button>
+
+<button onclick="setGrid(4)">
+4 Col
+</button>
+
+</div>
+
+<div
+  class="grid-demo"
+  id="gridDemo"
+>
+
+<div class="grid-item">1</div>
+<div class="grid-item">2</div>
+<div class="grid-item">3</div>
+<div class="grid-item">4</div>
+
+</div>
+
+<div class="code">
+
+<div class="code-top">
+Live Grid Code
+</div>
+
+<pre><code id="gridCode"></code></pre>
+
+</div>
+
+<div class="comment">
+
+<strong>Assessment Standard:</strong>
+
+CSS Grid creates two-dimensional layouts
+that adapt responsively to screen sizes.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- TYPOGRAPHY -->
+<!-- ========================================= -->
+
+<div class="card">
+
+<div class="card-header">
+<h2>Responsive Typography</h2>
+</div>
+
+<div class="card-body">
+
+<p
+  id="responsiveText"
+  style="
+    font-size:16px;
+    transition:0.3s;
+  "
+>
+This text dynamically scales
+with viewport size.
+</p>
+
+<div class="code">
+
+<div class="code-top">
+Live Typography Code
+</div>
+
+<pre><code id="textCode"></code></pre>
+
+</div>
+
+<div class="comment">
+
+<strong>Assessment Standard:</strong>
+
+Responsive typography improves readability
+and accessibility across devices.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- IMAGES -->
+<!-- ========================================= -->
+
+<div class="card">
+
+<div class="card-header">
+<h2>Responsive Images</h2>
+</div>
+
+<div class="card-body">
+
+<img
+  src="https://picsum.photos/1200/700"
+  class="image"
+/>
+
+<div class="code">
+
+<div class="code-top">
+Responsive Image CSS
+</div>
+
+<pre><code>img{
+  width:100%;
+  height:auto;
+  object-fit:cover;
+}</code></pre>
+
+</div>
+
+<div class="comment">
+
+<strong>Assessment Standard:</strong>
+
+Responsive images adapt to different
+screen sizes while maintaining quality.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- DARK / LIGHT MODE -->
+<!-- ========================================= -->
+
+<div class="card">
+
+<div class="card-header">
+<h2>Dark & Light Mode</h2>
+</div>
+
+<div class="card-body">
+
+<p>
+Use the theme toggle button in the
+top-right corner to switch themes.
+</p>
+
+<div class="code">
+
+<div class="code-top">
+Theme Toggle Code
+</div>
+
+<pre><code>function toggleTheme(){
+
+  document.body.classList.toggle(
+    "light"
+  );
+
+}</code></pre>
+
+</div>
+
+<div class="comment">
+
+<strong>Assessment Standard:</strong>
+
+Dark and light themes improve usability,
+accessibility, and user personalization.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+/* ========================================= */
+/* ELEMENTS */
+/* ========================================= */
+
+const slider =
+  document.getElementById("slider");
+
+const preview =
+  document.getElementById("preview");
+
+const widthText =
+  document.getElementById("width");
+
+const device =
+  document.getElementById("device");
+
+const mediaCode =
+  document.getElementById("mediaCode");
+
+const textCode =
+  document.getElementById("textCode");
+
+const responsiveText =
+  document.getElementById("responsiveText");
+
+/* ========================================= */
+/* VIEWPORT */
+/* ========================================= */
+
+function updateViewport(){
+
+  const width =
+    parseInt(slider.value);
+
+  preview.style.width =
+    width + "px";
+
+  widthText.innerText =
+    width + "px";
+
+  if(width <= 430){
+
+    device.innerText = "iPhone";
+
+  }
+
+  else if(width <= 768){
+
+    device.innerText = "Tablet";
+
+  }
+
+  else if(width <= 1280){
+
+    device.innerText = "Laptop";
+
+  }
+
+  else{
+
+    device.innerText = "Desktop";
+
+  }
+
+  const direction =
+    width >= 768
+      ? "row"
+      : "column";
+
+  document.getElementById(
+    "responsiveLayout"
+  ).style.flexDirection =
+    direction;
+
+  const fontSize =
+    Math.max(
+      16,
+      Math.floor(width / 35)
+    );
+
+  responsiveText.style.fontSize =
+    fontSize + "px";
+
+  mediaCode.innerText =
+
+`.layout{
+  display:flex;
+  flex-direction:${direction};
+}
+
+.current-width{
+  width:${width}px;
+}`;
+
+  textCode.innerText =
+
+`p{
+  font-size:${fontSize}px;
+  line-height:1.8;
+}`;
+
+}
+
+slider.addEventListener(
+  "input",
+  updateViewport
+);
+
+updateViewport();
+
+/* ========================================= */
+/* FLEXBOX */
+/* ========================================= */
+
+const flexDemo =
+  document.getElementById("flexDemo");
+
+const flexCode =
+  document.getElementById("flexCode");
+
+let direction = "row";
+let wrap = "wrap";
+
+function updateFlexCode(){
+
+  flexCode.innerText =
+
+`display:flex;
+flex-direction:${direction};
+flex-wrap:${wrap};
+gap:12px;`;
+
+}
+
+function setRow(){
+
+  direction = "row";
+
+  flexDemo.style.flexDirection =
+    "row";
+
+  updateFlexCode();
+
+}
+
+function setColumn(){
+
+  direction = "column";
+
+  flexDemo.style.flexDirection =
+    "column";
+
+  updateFlexCode();
+
+}
+
+function toggleWrap(){
+
+  wrap =
+    wrap === "wrap"
+      ? "nowrap"
+      : "wrap";
+
+  flexDemo.style.flexWrap =
+    wrap;
+
+  updateFlexCode();
+
+}
+
+updateFlexCode();
+
+/* ========================================= */
+/* GRID */
+/* ========================================= */
+
+const gridCode =
+  document.getElementById("gridCode");
+
+function setGrid(cols){
+
+  document.getElementById(
+    "gridDemo"
+  ).style.gridTemplateColumns =
+    `repeat(${cols},1fr)`;
+
+  gridCode.innerText =
+
+`display:grid;
+grid-template-columns:
+repeat(${cols},1fr);
+gap:12px;`;
+
+}
+
+setGrid(2);
+
+/* ========================================= */
+/* THEME */
+/* ========================================= */
+
+function toggleTheme(){
+
+  document.body.classList.toggle(
+    "light"
+  );
+
+  const button =
+    document.getElementById(
+      "themeToggle"
+    );
+
+  if(
+    document.body.classList.contains(
+      "light"
+    )
+  ){
+
+    button.innerText =
+      "Toggle Dark Mode";
+
+  }
+
+  else{
+
+    button.innerText =
+      "Toggle Light Mode";
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>

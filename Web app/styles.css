@@ -1,0 +1,174 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: hsl(226, 43%, 10%);
+  font-family: "Rubik", sans-serif;
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  max-width: 900px;
+  width: 100%;
+}
+
+.profile-card {
+  background: hsl(246, 80%, 60%);
+  border-radius: 16px;
+  padding: 2rem;
+  grid-row: 1 / 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 3px solid white;
+  margin-bottom: 1rem;
+}
+
+.report-label {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 4px;
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space);
+  padding: var(--space);
+  max-width: 375px;
+  margin: 10px auto;
+}
+
+.profile-name {
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+.time-periods {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.period {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 15px;
+  text-align: left;
+  cursor: pointer;
+  padding: 4px 0;
+  font-family: "Rubik", sans-serif;
+}
+
+.period.active,
+.period:hover {
+  color: white;
+}
+
+.track-card {
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.card-top {
+  height: 45px;
+  background-repeat: no-repeat;
+  background-position: right 1rem top -5px;
+  background-size: 75px;
+}
+
+.card-body {
+  background: hsl(235, 46%, 20%);
+  padding: 1.5rem;
+}
+
+.card-body:hover {
+  background: hsl(235, 46%, 30%);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.card-title {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.card-menu {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+.card-menu:hover {
+  color: white;
+}
+
+.card-hours {
+  font-size: 32px;
+  font-weight: 300;
+  margin-bottom: 6px;
+}
+
+.card-previous {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+#work .card-top {
+  background-color: hsl(15, 100%, 70%);
+  margin-top: 10px;
+  border-radius: 7px;
+}
+#play .card-top {
+  background-color: hsl(195, 74%, 62%);
+    margin-top: 10px;
+    border-radius: 7px;
+}
+#study .card-top {
+  background-color: hsl(348, 100%, 68%);
+    margin-top: 10px;
+    border-radius: 7px;
+}
+#exercise .card-top {
+  background-color: hsl(145, 58%, 55%);
+    margin-top: 10px;
+    border-radius: 7px;
+}
+#social .card-top {
+  background-color: hsl(264, 64%, 52%);
+    margin-top: 10px;
+    border-radius: 7px;
+}
+#selfcare .card-top {
+  background-color: hsl(43, 84%, 65%);
+    margin-top: 10px;
+    border-radius: 7px;
+}
