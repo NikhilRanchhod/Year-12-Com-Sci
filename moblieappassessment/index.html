@@ -10,32 +10,38 @@
 
 <body>
     <h1 class="pagetitle">Smart Attendance Scanner</h1>
+        <p class="description"><strong>Open Camera and scan The barcode on your id card: </strong><br><span class="trading">Stock trading club</span></p>
     <main class="scannerpage">
         <video id="cameraFeed" autoplay playsinline muted></video>
         <button id="enableCameraBtn" class="camera-button">Enable Camera</button>
 
+        <p id="scanResult" class="scan-result">No barcode scanned yet.</p>
+
+        <script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.18.6/umd/index.min.js"></script>
         <script>
             const enableCameraBtn = document.getElementById('enableCameraBtn');
             const cameraFeed = document.getElementById('cameraFeed');
+            const scanResult = document.getElementById('scanResult');
+            const codeReader = new ZXing.BrowserMultiFormatReader();
             let isCameraOn = false;
 
             enableCameraBtn.addEventListener('click', async () => {
                 if (isCameraOn) {
-                    // Turn off camera
-                    const stream = cameraFeed.srcObject;
-                    const tracks = stream.getTracks();
-                    tracks.forEach(track => track.stop());
+                    codeReader.reset();
                     cameraFeed.srcObject = null;
                     enableCameraBtn.textContent = 'Enable Camera';
-                    enableCameraBtn.disabled = false;
+                    scanResult.textContent = 'No barcode scanned yet.';
                     isCameraOn = false;
                 } else {
-                    // Turn on camera
                     try {
-                        const stream = await navigator.mediaDevices.getUserMedia({
-                            video: { facingMode: 'environment' }
+                        await codeReader.decodeFromVideoDevice(null, 'cameraFeed', (result, err) => {
+                            if (result) {
+                                scanResult.textContent = `Scanned code: ${result.text}`;
+                            }
+                            if (err && err.name !== 'NotFoundException') {
+                                console.error(err);
+                            }
                         });
-                        cameraFeed.srcObject = stream;
                         enableCameraBtn.textContent = 'Disable Camera';
                         isCameraOn = true;
                     } catch (error) {
@@ -45,12 +51,5 @@
                 }
             });
         </script>
- 
-
-
-
-
-        </script>
-
     </main>
 </body>

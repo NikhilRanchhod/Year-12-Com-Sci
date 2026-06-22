@@ -6,32 +6,52 @@
 }
 
 .pagetitle {
-    font-size: 24px;
     color: #166291;
-   
+    font-size: 40px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 14px 10px;
 }
+
+.description{
+    font-size: 25px;
+    color: #104363;
+    text-align: left;
+    font-weight: bold;
+    width: 100%;
+    max-width: 500px;
+    margin: 120px auto 0;
+    padding: 0 10px;
+}
+
+.trading {
+    display: inline-block;
+    font-weight: normal;
+    color: #104363;
+}
+
 body {
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     min-height: 100vh;
+    margin: 0;
 }
 
 .scannerpage {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 20px;
     width: 100%;
     max-width: 500px;
-}
-.scannerpage {
-    justify-content: center;
+    height: calc(100vh - 64px);
+    margin: 64px auto 0;
 }
 
 .camera-button {
-    padding: 12px 30px;
+    padding: 12px;
     font-size: 16px;
     background-color: #264759;
     color: white;
@@ -57,4 +77,13 @@ body {
     border: 2px solid #ddd;
     border-radius: 8px;
     background-color: #000;
+    text-align: center;
+}
+
+.scan-result {
+    font-size: 16px;
+    color: #104363;
+    text-align: center;
+    margin: 0;
+    padding: 0 10px;
 }
