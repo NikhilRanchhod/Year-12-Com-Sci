@@ -12,7 +12,7 @@
     <h1 class="pagetitle">Smart Attendance Scanner</h1>
         <p class="description"><strong>Open Camera and scan The barcode on your id card: </strong><br><span class="trading">Stock trading club</span></p>
     <main class="scannerpage">
-        <video id="cameraFeed" autoplay playsinline muted></video>
+        <video id="camera" autoplay playsinline muted></video>
         <button id="enableCameraBtn" class="camera-button">Enable Camera</button>
 
         <p id="scanResult" class="scan-result">No barcode scanned yet.</p>
@@ -20,23 +20,52 @@
         <script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.18.6/umd/index.min.js"></script>
         <script>
             const enableCameraBtn = document.getElementById('enableCameraBtn');
-            const cameraFeed = document.getElementById('cameraFeed');
+            const camera = document.getElementById('camera');
             const scanResult = document.getElementById('scanResult');
             const codeReader = new ZXing.BrowserMultiFormatReader();
+            const barcodeToName = {
+                '1001': 'Jack Allen',
+                '1002': 'Liam Berryman',
+                '1003': 'Alastair Cheneka',
+                '1004': 'Bowen Dong',
+                '1005': 'Oscar Gu',
+                '1006': 'Leith Harris',
+                '1007': 'Matthew Holmes',
+                '1008': 'Timothy Kavalenka',
+                '1009': 'Andrew Li',
+                '1010': 'Maodong Li',
+                '1011': 'Kevin Luo',
+                '1012': 'Harry Parfoot',
+                '175220': 'Nikhil Ranchhod',
+                '1014': 'Angus Watson',
+                '1015': 'Oliver Wood'
+            };
             let isCameraOn = false;
 
             enableCameraBtn.addEventListener('click', async () => {
                 if (isCameraOn) {
                     codeReader.reset();
-                    cameraFeed.srcObject = null;
+                    camera.srcObject = null;
                     enableCameraBtn.textContent = 'Enable Camera';
                     scanResult.textContent = 'No barcode scanned yet.';
                     isCameraOn = false;
                 } else {
                     try {
-                        await codeReader.decodeFromVideoDevice(null, 'cameraFeed', (result, err) => {
+                        await codeReader.decodeFromVideoDevice(null, 'camera', (result, err) => {
                             if (result) {
-                                scanResult.textContent = `Scanned code: ${result.text}`;
+                                const studentName = barcodeToName[result.text];
+                                if (studentName) {
+                                    const presentStudents = JSON.parse(sessionStorage.getItem('presentStudents') || '[]');
+                                    if (!presentStudents.includes(studentName)) {
+                                        presentStudents.push(studentName);
+                                        sessionStorage.setItem('presentStudents', JSON.stringify(presentStudents));
+                                    }
+                                    sessionStorage.setItem('activeTab', 'present');
+                                    scanResult.textContent = `Marked present: ${studentName}`;
+                                    window.location.href = 'classlist.html';
+                                } else {
+                                    scanResult.textContent = `Unknown barcode: ${result.text}`;
+                                }
                             }
                             if (err && err.name !== 'NotFoundException') {
                                 console.error(err);
@@ -52,4 +81,14 @@
             });
         </script>
     </main>
+</main>
+
+    <nav class="nav-bottom">
+        <a class="nav" href="classlist.html">Class List</a>
+        <a class="nav" href="index.html">Scanner</a>
+        <a class="nav" href="schedule.html">Schedule</a>
+        <a class="nav" href="#">About</a>
+    </nav>
+
 </body>
+</html>

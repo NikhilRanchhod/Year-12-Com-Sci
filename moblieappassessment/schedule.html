@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile App</title>
+    <link rel="stylesheet" href="stylesmobile.css">
+</head>
+
+  
+<body>
+    <div class="page-content">
+        <h1 class="pagetitle">Schedule</h1>
+
+        <div class="calendar">
+            <div class="month">
+                <button class="month-nav" onclick="changeMonth(-1)">&#10094;</button>
+                <span id="monthLabel">July 2026</span>
+                <button class="month-nav" onclick="changeMonth(1)">&#10095;</button>
+            </div>
+
+            <div class="weekdays">
+                <div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div>
+            </div>
+
+            <div class="days" id="daysGrid"></div>
+        </div>
+    </div>
+
+    <script>
+        const today = new Date();
+        let currentDate = new Date(today.getFullYear(), today.getMonth(), 1);
+
+        function renderCalendar() {
+            const monthLabel = document.getElementById('monthLabel');
+            const daysGrid = document.getElementById('daysGrid');
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+            monthLabel.textContent = `${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
+            daysGrid.innerHTML = '';
+
+            const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDay();
+            const lastDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
+
+            for (let i = 0; i < firstDay; i++) {
+                const empty = document.createElement('div');
+                empty.className = 'empty';
+                daysGrid.appendChild(empty);
+            }
+
+            for (let day = 1; day <= lastDate; day++) {
+                const cell = document.createElement('div');
+                cell.textContent = day;
+                if (
+                    day === today.getDate() &&
+                    currentDate.getMonth() === today.getMonth() &&
+                    currentDate.getFullYear() === today.getFullYear()
+                ) {
+                    cell.className = 'today';
+                }
+                daysGrid.appendChild(cell);
+            }
+        }
+
+        function changeMonth(offset) {
+            currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + offset, 1);
+            renderCalendar();
+        }
+
+        renderCalendar();
+    </script>
+
+    <nav class="nav-bottom">
+        <a class="nav" href="classlist.html">Class List</a>
+        <a class="nav" href="index.html">Scanner</a>
+        <a class="nav" href="schedule.html">Schedule</a>
+        <a class="nav" href="#">About</a>
+    </nav>
+</body>
+</html>

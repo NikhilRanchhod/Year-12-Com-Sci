@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile App</title>
+    <link rel="stylesheet" href="stylesmobile.css">
+</head>
+
+<body>
+    <div class="page">
+        <h1 class="pagetitle">Class List</h1>
+
+        <div class="tabs">
+            <button class="tab active" onclick="setActiveTab(this); showAll()">All</button>
+            <button class="tab" onclick="setActiveTab(this); showPresent()">Present</button>
+            <button class="tab" onclick="setActiveTab(this); showAbsent()">Absent</button>
+        </div>
+
+        <ul class="student-list">
+            <li class="student" data-status="absent">Jack Allen</li>
+            <li class="student" data-status="absent">Liam Berryman</li>
+            <li class="student" data-status="absent">Alastair Cheneka</li>
+            <li class="student" data-status="absent">Bowen Dong</li>
+            <li class="student" data-status="absent">Oscar Gu</li>
+            <li class="student" data-status="absent">Leith Harris</li>
+            <li class="student" data-status="absent">Matthew Holmes</li>
+            <li class="student" data-status="absent">Timothy Kavalenka</li>
+            <li class="student" data-status="absent">Andrew Li</li>
+            <li class="student" data-status="absent">Maodong Li</li>
+            <li class="student" data-status="absent">Kevin Luo</li>
+            <li class="student" data-status="absent">Harry Parfoot</li>
+            <li class="student" data-status="absent">Nikhil Ranchhod</li>
+            <li class="student" data-status="absent">Angus Watson</li>
+            <li class="student" data-status="absent">Oliver Wood</li>
+        </ul>
+    </div>
+
+    <script>
+        function setActiveTab(button) {
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            button.classList.add('active');
+        }
+
+        function getPresentStudents() {
+            return JSON.parse(sessionStorage.getItem('presentStudents') || '[]');
+        }
+
+        function updateStudentStatuses() {
+            const presentStudents = getPresentStudents();
+            const students = document.querySelectorAll('.student');
+            students.forEach(student => {
+                const name = student.textContent.trim();
+                const isPresent = presentStudents.includes(name);
+                student.setAttribute('data-status', isPresent ? 'present' : 'absent');
+            });
+        }
+
+        function showAll() {
+            updateStudentStatuses();
+            const students = document.querySelectorAll('.student');
+            students.forEach(student => student.style.display = 'block');
+        }
+
+        function showPresent() {
+            updateStudentStatuses();
+            const students = document.querySelectorAll('.student');
+            students.forEach(student => {
+                const status = student.getAttribute('data-status');
+                student.style.display = status === 'present' ? 'block' : 'none';
+            });
+        }
+
+        function showAbsent() {
+            updateStudentStatuses();
+            const students = document.querySelectorAll('.student');
+            students.forEach(student => {
+                const status = student.getAttribute('data-status');
+                student.style.display = status === 'absent' ? 'block' : 'none';
+            });
+        }
+
+        window.addEventListener('load', () => {
+            updateStudentStatuses();
+            const savedTab = sessionStorage.getItem('activeTab');
+            const tabs = document.querySelectorAll('.tab');
+
+            if (savedTab === 'present') {
+                setActiveTab(tabs[1]);
+                showPresent();
+            } else if (savedTab === 'absent') {
+                setActiveTab(tabs[2]);
+                showAbsent();
+            } else {
+                setActiveTab(tabs[0]);
+                showAll();
+            }
+        });
+    </script>
+
+    <nav class="nav-bottom">
+        <a class="nav" href="classlist.html">Class List</a>
+        <a class="nav" href="index.html">Scanner</a>
+        <a class="nav" href="schedule.html">Schedule</a>
+        <a class="nav" href="#">About</a>
+    </nav>
+</body>
+
+</html>
