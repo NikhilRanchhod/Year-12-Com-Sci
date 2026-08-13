@@ -1,23 +1,34 @@
 * {
-    background-color: #6E8898;
+    background-color: #6BB6AD;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-.pagetitle {
-    color: #166291;
+.pagetitle,
+.pagetitleschedule,
+.pagetitlelist {
+    color: #0a726b;
     font-size: 40px;
-    top: 0;
-    left: 0;
-    width: 100%;
     text-align: center;
     padding: 14px 10px;
+    margin: 15px auto 0;
+    border-radius: 15px;
+    border: #131212 solid;
+    box-shadow: 5px 5px 10px 2px rgba(9, 95, 255, 0.3);
+    display: block;
+    width: fit-content;
+    max-width: calc(100% - 20px);
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 .description{
     font-size: 25px;
-    color: #104363;
+    color: #0a726b;
     text-align: left;
     font-weight: bold;
     width: 100%;
@@ -30,7 +41,7 @@
 .trading {
     display: inline-block;
     font-weight: normal;
-    color: #104363;
+    color: #0a726b;
 }
 
 body {
@@ -38,6 +49,22 @@ body {
     min-height: 100vh;
     margin: 0;
     padding-bottom: 64px;
+}
+
+:root {
+    --calendar-bg: #f4f9fb;
+    --calendar-header-bg: #277070;
+    --calendar-header-text: #ffffff;
+    --calendar-weekday-bg: #97cccc;
+    --calendar-day-border: #74a9a9;
+    --calendar-day-bg: #A0DEDE;
+    --calendar-text: #017d75;
+    --calendar-today-bg: #0dcbcb;
+    --calendar-selected-bg: #08e4d9;
+    --calendar-selected-outline: #109990;
+    --calendar-dot: #0d7a5f;
+    --calendar-panel-bg: #71c8c0;
+    --calendar-panel-text: #02645d;
 }
 
 .page {
@@ -58,20 +85,20 @@ body {
     padding: 10px;
     border: none;
     border-radius: 8px;
-    background-color: #264759;
-    color: white;
+    background-color: #109990;
+    color: #d4fbf8;
     font-size: 14px;
     cursor: pointer;
 }
 
 .tab.active {
-    background-color: #0d3042;
+    background-color: #016b64;
     font-weight: bold;
     box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.2);
 }
 
 .tab:hover {
-    background-color: #30607a;
+    background-color: #016d66;
 }
 
 .student-list {
@@ -87,7 +114,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #f4f9fb;
+    background-color: #b5eeee;
     color: #104363;
     padding: 12px 14px;
     border-radius: 8px;
@@ -130,32 +157,95 @@ body {
     padding-top: 40px;
 }
 
-.camera-button {
-    padding: 12px;
+.c-button {
+    color: #000;
+    font-weight: 700;
     font-size: 16px;
-    background-color: #264759;
-    color: white;
-    border: none;
-    border-radius: 5px;
+    text-decoration: none;
+    padding: 0.9em 1.6em;
     cursor: pointer;
-    transition: background-color 0.3s;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    z-index: 1;
     margin-top: 20px;
+    background: transparent;
+    border: none;
+    appearance: none;
 }
 
-.camera-button:hover {
-    background-color: #30607a;
+.c-button--gooey {
+    color: #0a726b;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: 4px solid #0a726b;
+    border-radius: 0;
+    position: relative;
+    transition: all 700ms ease;
+    overflow: hidden;
+    border-radius: 15px;
 }
 
-.camera-button:disabled {
-    background-color: #cccccc;
+.c-button__label {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+}
+
+.c-button--gooey .c-button__blobs {
+    height: 100%;
+    filter: url(#goo);
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: -3px;
+    right: -1px;
+    z-index: -1;
+}
+
+.c-button--gooey .c-button__blobs div {
+    background-color: #0a726b;
+    width: 36%;
+    height: 100%;
+    border-radius: 100%;
+    position: absolute;
+    transform: scale(1.4) translateY(125%) translateZ(0);
+    transition: all 700ms ease;
+}
+
+.c-button--gooey .c-button__blobs div:nth-child(1) {
+    left: -5%;
+}
+
+.c-button--gooey .c-button__blobs div:nth-child(2) {
+    left: 30%;
+    transition-delay: 60ms;
+}
+
+.c-button--gooey .c-button__blobs div:nth-child(3) {
+    left: 66%;
+    transition-delay: 25ms;
+}
+
+.c-button--gooey:hover {
+    color: #affaf5;
+}
+
+.c-button--gooey:hover .c-button__blobs div {
+    transform: scale(1.4) translateY(0) translateZ(0);
+}
+
+.c-button:disabled {
     cursor: not-allowed;
+    opacity: 0.7;
 }
 
 #camera {
     width: 100%;
     max-width: 500px;
     height: auto;
-    border: 2px solid #ddd;
+    border: 5px solid #109990;
     border-radius: 8px;
     background-color: #000;
     text-align: center;
@@ -163,13 +253,12 @@ body {
 
 .scan-result {
     font-size: 16px;
-    color: #104363;
+    color: #08655f;
     text-align: center;
     margin: 0;
     padding: 0 10px;
 }
 
-/* Minimal bottom nav styles */
 .nav-bottom {
     position: fixed;
     left: 0;
@@ -179,31 +268,41 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background: #166291;
+    background: #109990;
     z-index: 1000;
 }
 .nav-bottom .nav {
-    color: #E0DAD0;
-    background: #166291;
+    color: #A9D3CE;
+    background: #109990;
     font-size: 20px;
     text-decoration: none;
    
 }
 
 .nav-bottom .nav:hover {
-    background-color: #1f7aa8;
+    background-color: #03877f;
     border-radius: 8px;
     padding: 6px 10px;
 }
 
+.calendar-wrap {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 10px;
+    flex-wrap: wrap;
+}
+
 .calendar {
     font-family: sans-serif;
-    max-width: 350px;
-    margin: 20px auto 0;
-    background: #f4f9fb;
+    width: 100%;
+    max-width: 360px;
+    background: var(--calendar-bg);
     border-radius: 12px;
     overflow: hidden;
-    color: #104363;
+    color: var(--calendar-text);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .month {
@@ -212,13 +311,13 @@ body {
     align-items: center;
     font-weight: bold;
     padding: 10px 12px;
-    background: #264759;
-    color: white;
+    background: var(--calendar-header-bg);
+    color: #beebe5;
 }
 
 .month-nav {
     background: transparent;
-    color: white;
+    color: #78c7c2;
     border: none;
     font-size: 16px;
     cursor: pointer;
@@ -233,20 +332,210 @@ body {
 .weekdays div {
     font-weight: bold;
     padding: 8px 0;
-    background: #e9f2f6;
+    background: var(--calendar-weekday-bg);
+    color: var(--calendar-text);
 }
 
 .days div {
-    padding: 10px 0;
-    border: 1px solid #dde7eb;
+    padding: 12px 0;
+    border: 1px solid var(--calendar-day-border);
+    background: var(--calendar-day-bg);
+    cursor: pointer;
+    position: relative;
+    color: var(--calendar-text);
 }
 
 .days .empty {
     background: transparent;
     border: 1px solid transparent;
+    cursor: default;
 }
 
 .today {
-    background-color: #ffeb3b;
+    background-color: var(--calendar-today-bg) !important;
     font-weight: bold;
 }
+
+.selected-day {
+    background: var(--calendar-selected-bg) !important;
+    box-shadow: inset 0 0 0 2px var(--calendar-selected-outline);
+}
+
+.event-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    background-color: var(--calendar-dot);
+    border-radius: 50%;
+    margin-left: 4px;
+    vertical-align: middle;
+}
+
+.today .event-dot {
+    background-color: var(--calendar-selected-outline);
+}
+
+.event-panel {
+    flex: 1;
+    width: 100%;
+    max-width: 320px;
+    min-width: 280px;
+    background: var(--calendar-panel-bg);
+    border-radius: 12px;
+    padding: 20px;
+    color: var(--calendar-panel-text);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.event-panel h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #04645e;
+    font-size: 18px;
+    border-bottom: 2px solid #0a514c;
+    padding-bottom: 10px;
+}
+
+#eventForm {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+#eventForm label {
+    font-weight: bold;
+    font-size: 14px;
+    color: var(--calendar-panel-text);
+}
+
+#eventForm input,
+#eventForm textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #c9d6dd;
+    border-radius: 6px;
+    font-family: inherit;
+    box-sizing: border-box;
+    background: #6dbcb6;
+}
+
+#eventForm textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.save-btn {
+    margin-top: 8px;
+    background: #089087;
+    color: #9dd8d8;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.save-btn:hover {
+    background: #095f59f0;
+}
+
+.event-list {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.event-item {
+    background: #1897d2;
+    border-left: 4px solid #0d7a5f;
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.event-item strong {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.event-item small {
+    display: block;
+    color: #0d7a5f;
+}
+
+@media (max-width: 768px) {
+    .event-panel {
+        min-width: auto;
+    }
+    .pagetitle,
+    .pagetitleschedule,
+    .pagetitlelist {
+        font-size: 30px;
+        margin: 15px auto 0;
+        display: block;
+        width: 100%;
+        max-width: calc(100% - 16px);
+    }
+
+    .description {
+        font-size: 20px;
+        margin-top: 15px;
+    }
+
+    .tabs {
+        flex-wrap: wrap;
+    }
+
+    .tab {
+        flex: 1 1 calc(50% - 5px);
+    }
+
+    .student {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .calendar {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .pagetitle,
+    .pagetitleschedule,
+    .pagetitlelist {
+        font-size: 24px;
+        margin: 15px auto 0;
+        padding: 10px;
+        display: block;
+        width: 100%;
+        max-width: calc(100% - 12px);
+    }
+
+    .description {
+        font-size: 18px;
+        padding: 0 8px;
+    }
+
+    .tab {
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    .camera-button {
+        width: 100%;
+    }
+
+    .scannerpage {
+        padding-top: 20px;
+    }
+
+    .nav-bottom .nav {
+        font-size: 14px;
+    }
+}
+

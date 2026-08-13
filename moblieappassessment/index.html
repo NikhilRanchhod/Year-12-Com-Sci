@@ -9,59 +9,93 @@
 </head>
 
 <body>
+    <!--title on the top of the screen-->
     <h1 class="pagetitle">Smart Attendance Scanner</h1>
-        <p class="description"><strong>Open Camera and scan The barcode on your id card: </strong><br><span class="trading">Stock trading club</span></p>
+        <p class="description"><strong>Open Camera and scan The barcode on your id card: </strong><br><span class="trading">Stark House Tutor</span></p>
     <main class="scannerpage">
+        <!--shows camera feed-->
         <video id="camera" autoplay playsinline muted></video>
-        <button id="enableCameraBtn" class="camera-button">Enable Camera</button>
-
+        <!--Enabling and disabling camera-->
+        <button id="enableCameraBtn" class="c-button c-button--gooey" type="button">
+            <span class="c-button__label">Enable Camera</span>
+            <div class="c-button__blobs">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </button>
+        <!--Animation from uiverse-->
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display: block; height: 0; width: 0;">
+            <defs>
+                <filter id="goo">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
+                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo"></feColorMatrix>
+                    <feBlend in="SourceGraphic" in2="goo"></feBlend>
+                </filter>
+            </defs>
+        </svg>
+        <!--displays the code after scanning-->
         <p id="scanResult" class="scan-result">No barcode scanned yet.</p>
 
         <script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.18.6/umd/index.min.js"></script>
         <script>
+            // camera button to enable camera
             const enableCameraBtn = document.getElementById('enableCameraBtn');
             const camera = document.getElementById('camera');
+            const buttonLabel = enableCameraBtn.querySelector('.c-button__label');
+            // shows the barcodes results 
             const scanResult = document.getElementById('scanResult');
+            // creates a barcode scanner
             const codeReader = new ZXing.BrowserMultiFormatReader();
+            // Stores the barcode numbers and matching student names
             const barcodeToName = {
-                '1001': 'Jack Allen',
-                '1002': 'Liam Berryman',
-                '1003': 'Alastair Cheneka',
-                '1004': 'Bowen Dong',
-                '1005': 'Oscar Gu',
-                '1006': 'Leith Harris',
-                '1007': 'Matthew Holmes',
-                '1008': 'Timothy Kavalenka',
-                '1009': 'Andrew Li',
-                '1010': 'Maodong Li',
-                '1011': 'Kevin Luo',
-                '1012': 'Harry Parfoot',
+                '3123': 'Jack Allen',
+                '174774': 'Liam Berryman',
+                '31': 'Alastair Cheneka',
+                '312': 'Bowen Dong',
+                '33': 'Oscar Gu',
+                '765': 'Leith Harris',
+                '68': 'Matthew Holmes',
+                '8656': 'Timothy Kavalenka',
+                '5645': 'Andrew Li',
+                '4353': 'Maodong Li',
+                '453': 'Kevin Luo',
+                '60': 'Harry Parfoot',
                 '175220': 'Nikhil Ranchhod',
-                '1014': 'Angus Watson',
-                '1015': 'Oliver Wood'
+                '7655': 'Angus Watson',
+                '9876': 'Oliver Wood'
             };
             let isCameraOn = false;
 
+            //starts the cameras
             enableCameraBtn.addEventListener('click', async () => {
                 if (isCameraOn) {
                     codeReader.reset();
                     camera.srcObject = null;
-                    enableCameraBtn.textContent = 'Enable Camera';
+                    buttonLabel.textContent = 'Enable Camera';
                     scanResult.textContent = 'No barcode scanned yet.';
                     isCameraOn = false;
                 } else {
                     try {
+                        // reads the barcode for the camera feed 
                         await codeReader.decodeFromVideoDevice(null, 'camera', (result, err) => {
+                            // gives a result if the  barcode matches one of the students name  
                             if (result) {
+                                //look for the students name 
                                 const studentName = barcodeToName[result.text];
                                 if (studentName) {
                                     const presentStudents = JSON.parse(sessionStorage.getItem('presentStudents') || '[]');
+                                    // stops duplicate scans so students can't scan there id card twice
                                     if (!presentStudents.includes(studentName)) {
                                         presentStudents.push(studentName);
-                                        sessionStorage.setItem('presentStudents', JSON.stringify(presentStudents));
+                                        //saves the students name so it can be marked present on the class list page
+                                        sessionStorage.setItem('presentStudents', JSON.stringify(presentStudents)); 
                                     }
+                                    // when the id card is scanned it marks there name present
                                     sessionStorage.setItem('activeTab', 'present');
+                                    //shows the students names in the present tab in the class list page
                                     scanResult.textContent = `Marked present: ${studentName}`;
+                                    //takes them to the class list page after scanning the students id cards
                                     window.location.href = 'classlist.html';
                                 } else {
                                     scanResult.textContent = `Unknown barcode: ${result.text}`;
@@ -71,7 +105,7 @@
                                 console.error(err);
                             }
                         });
-                        enableCameraBtn.textContent = 'Disable Camera';
+                        buttonLabel.textContent = 'Disable Camera';
                         isCameraOn = true;
                     } catch (error) {
                         console.error('Error accessing camera:', error);
@@ -82,7 +116,7 @@
         </script>
     </main>
 </main>
-
+<!--Bottom navigation menu-->
     <nav class="nav-bottom">
         <a class="nav" href="classlist.html">Class List</a>
         <a class="nav" href="index.html">Scanner</a>

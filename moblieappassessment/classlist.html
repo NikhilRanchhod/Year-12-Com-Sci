@@ -10,14 +10,16 @@
 
 <body>
     <div class="page">
-        <h1 class="pagetitle">Class List</h1>
-
+        <!--page title-->
+        <h1 class="pagetitlelist">Stark Tutor Class</h1>
+        <!--Buttons used to filter students in the tab lists-->
         <div class="tabs">
             <button class="tab active" onclick="setActiveTab(this); showAll()">All</button>
             <button class="tab" onclick="setActiveTab(this); showPresent()">Present</button>
             <button class="tab" onclick="setActiveTab(this); showAbsent()">Absent</button>
         </div>
-
+        
+        <!--list of students in class-->
         <ul class="student-list">
             <li class="student" data-status="absent">Jack Allen</li>
             <li class="student" data-status="absent">Liam Berryman</li>
@@ -38,68 +40,77 @@
     </div>
 
     <script>
+        //changes when tab is active 
         function setActiveTab(button) {
             const tabs = document.querySelectorAll('.tab');
             tabs.forEach(tab => tab.classList.remove('active'));
             button.classList.add('active');
         }
-
+        // gets the list of present students from storage
         function getPresentStudents() {
             return JSON.parse(sessionStorage.getItem('presentStudents') || '[]');
         }
-
+        // updates each student based on there saved attendance
         function updateStudentStatuses() {
             const presentStudents = getPresentStudents();
             const students = document.querySelectorAll('.student');
             students.forEach(student => {
+                // gets students name 
                 const name = student.textContent.trim();
+                // checkes if the student is in the present students list
                 const isPresent = presentStudents.includes(name);
+                // updates status 
                 student.setAttribute('data-status', isPresent ? 'present' : 'absent');
             });
         }
-
+        // shows all students in the all tab
         function showAll() {
             updateStudentStatuses();
             const students = document.querySelectorAll('.student');
             students.forEach(student => student.style.display = 'block');
         }
-
+        // shows only present students in the present tab 
         function showPresent() {
             updateStudentStatuses();
             const students = document.querySelectorAll('.student');
             students.forEach(student => {
                 const status = student.getAttribute('data-status');
+                // shows the students
                 student.style.display = status === 'present' ? 'block' : 'none';
             });
         }
-
+        // shows the students that are absent in the absent tab 
         function showAbsent() {
             updateStudentStatuses();
             const students = document.querySelectorAll('.student');
             students.forEach(student => {
                 const status = student.getAttribute('data-status');
+                //shows the students that are absent
                 student.style.display = status === 'absent' ? 'block' : 'none';
             });
         }
-
+        // Runs when the page finishes loading 
         window.addEventListener('load', () => {
+            //update the students attendance
             updateStudentStatuses();
+            // gets the before selected tab 
             const savedTab = sessionStorage.getItem('activeTab');
             const tabs = document.querySelectorAll('.tab');
-
+            // opens absent tab if it was last opened 
             if (savedTab === 'present') {
                 setActiveTab(tabs[1]);
                 showPresent();
             } else if (savedTab === 'absent') {
                 setActiveTab(tabs[2]);
                 showAbsent();
+            // opens all tab if it was last opened
             } else {
                 setActiveTab(tabs[0]);
                 showAll();
             }
         });
     </script>
-
+    <!--Bottom nav bar-->
     <nav class="nav-bottom">
         <a class="nav" href="classlist.html">Class List</a>
         <a class="nav" href="index.html">Scanner</a>
