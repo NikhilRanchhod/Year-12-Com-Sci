@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile App</title>
+    <link rel="stylesheet" href="stylesmobile.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <h1 class="admintitle">Records</h1>
+
+    <div id="passwordPopup" class="password-overlay">
+        <div class="password-popup">
+            <h2>Records</h2>
+            <p>Enter the password to access this page.</p>
+            <input type="password" id="passwordInput" placeholder="Password" autocomplete="off">
+
+            <p id="errorMessage" class="error-message"></p>
+            <div class="popup-buttons">
+                <button class="back-button" onclick="goBack()">
+                    Take Me Back
+                </button>
+                <button class="enter-button" onclick="checkPassword()">
+                    Enter
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <main id="adminRecords" class="page admin-records" hidden>
+        <h2 class="records-heading">Tutor attendance</h2>
+        <p id="attendanceDate" class="attendance-date"></p>
+
+        <div class="tabs admin-tabs">
+            <button class="tab active" onclick="setActiveTab(this); showAll()">All</button>
+            <button class="tab" onclick="setActiveTab(this); showPresent()">Present</button>
+            <button class="tab" onclick="setActiveTab(this); showAbsent()">Absent</button>
+        </div>
+        <ul class="student-list" id="adminStudentList">
+            <li class="student" data-name="Jack Allen"><button class="student-name" onclick="toggleAttendance(this)">Jack Allen</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
+            <li class="student" data-name="Liam Berryman"><button class="student-name" onclick="toggleAttendance(this)">Liam Berryman</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
+            <li class="student" data-name="Alastair Cheneka"><button class="student-name" onclick="toggleAttendance(this)">Alastair Cheneka</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
+            <li class="student" data-name="Bowen Dong"><button class="student-name" onclick="toggleAttendance(this)">Bowen Dong</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
+            <li class="student" data-name="Oscar Gu"><button class="student-name" onclick="toggleAttendance(this)">Oscar Gu</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
+            <li class="student" data-name="Leith Harris"><button class="student-name" onclick="toggleAttendance(this)">Leith Harris</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
+            <li class="student" data-name="Matthew Holmes"><button class="student-name" onclick="toggleAttendance(this)">Matthew Holmes</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
+            <li class="student" data-name="Timothy Kavalenka"><button class="student-name" onclick="toggleAttendance(this)">Timothy Kavalenka</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
+            <li class="student" data-name="Andrew Li"><button class="student-name" onclick="toggleAttendance(this)">Andrew Li</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
+            <li class="student" data-name="Maodong Li"><button class="student-name" onclick="toggleAttendance(this)">Maodong Li</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
+            <li class="student" data-name="Kevin Luo"><button class="student-name" onclick="toggleAttendance(this)">Kevin Luo</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
+            <li class="student" data-name="Harry Parfoot"><button class="student-name" onclick="toggleAttendance(this)">Harry Parfoot</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
+            <li class="student" data-name="Nikhil Ranchhod"><button class="student-name" onclick="toggleAttendance(this)">Nikhil Ranchhod</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
+            <li class="student" data-name="Angus Watson"><button class="student-name" onclick="toggleAttendance(this)">Angus Watson</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
+            <li class="student" data-name="Oliver Wood"><button class="student-name" onclick="toggleAttendance(this)">Oliver Wood</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
+        </ul>
+    </main>
+
+    <script>
+
+        const correctPassword = "1234";
+
+        function checkPassword() {
+
+            const password = document.getElementById("passwordInput").value;
+            const errorMessage = document.getElementById("errorMessage");
+
+            if (password === correctPassword) {
+                // Remove popup
+                document.getElementById("passwordPopup").style.display = "none";
+                // Allow the page to be used
+                document.body.classList.remove("locked");
+                document.getElementById("adminRecords").hidden = false;
+                updateDate();
+                updateAttendanceRecords();
+
+            } else {
+                errorMessage.textContent = "Incorrect password.";
+                document.getElementById("passwordInput").value = "";
+                document.getElementById("passwordInput").focus();
+            }
+        }
+        
+        function updateDate() {
+            const dateElement = document.getElementById("attendanceDate");
+            const today = new Date();
+            const formattedDate = today.toLocaleDateString("en-NZ", {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+            });
+
+            dateElement.textContent = formattedDate;
+            }
+
+        function updateAttendanceRecords() {
+            resetLiveAttendanceIfNeeded();
+            archiveTodayAttendance();
+            const records = JSON.parse(sessionStorage.getItem('attendanceRecords') || '{}');
+            document.querySelectorAll('#adminStudentList .student').forEach(student => {
+                const record = records[student.dataset.name];
+                student.dataset.status = record ? record.status.toLowerCase() : 'absent';
+                const time = record ? new Date(record.time).toLocaleTimeString([], {
+                    hour: 'numeric',
+                    minute: '2-digit'
+                }) : 'Not signed in';
+                student.querySelector('.attendance-time').textContent = record
+                    ? `${time} (${record.status})`
+                    : time;
+                renderWeeklyAttendance(student);
+            });
+        }
+
+        function resetLiveAttendanceIfNeeded() {
+            const todayKey = getDateKey();
+            if (sessionStorage.getItem('attendanceDate') !== todayKey) {
+                sessionStorage.removeItem('presentStudents');
+                sessionStorage.removeItem('attendanceRecords');
+                sessionStorage.setItem('attendanceDate', todayKey);
+            }
+        }
+
+        function getDateKey(date = new Date()) {
+            return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+        }
+
+        function getWeekStart(date = new Date()) {
+            const weekStart = new Date(date);
+            const day = weekStart.getDay();
+            if (day === 0) {
+                weekStart.setDate(weekStart.getDate() + 1);
+            } else if (day === 6) {
+                weekStart.setDate(weekStart.getDate() + 2);
+            } else {
+                weekStart.setDate(weekStart.getDate() - day + 1);
+            }
+            return weekStart;
+        }
+
+        function archiveTodayAttendance() {
+            const now = new Date();
+            const day = now.getDay();
+            if (day === 0 || day === 6) {
+                return;
+            }
+            const minutes = now.getHours() * 60 + now.getMinutes();
+            const dateKey = getDateKey(now);
+            const weekKey = getDateKey(getWeekStart(now));
+            const weeklyAttendance = JSON.parse(localStorage.getItem('weeklyAttendance') || '{}');
+            const todayRecords = JSON.parse(sessionStorage.getItem('attendanceRecords') || '{}');
+            weeklyAttendance[weekKey] ||= {};
+            weeklyAttendance[weekKey][dateKey] ||= {};
+
+            Object.keys(todayRecords).forEach(studentName => {
+                weeklyAttendance[weekKey][dateKey][studentName] = todayRecords[studentName];
+            });
+
+            if (minutes >= 8 * 60 + 50) {
+                document.querySelectorAll('#adminStudentList .student').forEach(student => {
+                    const studentName = student.dataset.name;
+                    if (!weeklyAttendance[weekKey][dateKey][studentName]) {
+                        weeklyAttendance[weekKey][dateKey][studentName] = { status: 'Absent' };
+                    }
+                });
+            }
+            localStorage.setItem('weeklyAttendance', JSON.stringify(weeklyAttendance));
+        }
+
+        function renderWeeklyAttendance(student) {
+            const weeklyAttendance = JSON.parse(localStorage.getItem('weeklyAttendance') || '{}');
+            const weekStart = getWeekStart();
+            const week = weeklyAttendance[getDateKey(weekStart)] || {};
+            const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+            const now = new Date();
+            const closingMinutes = 8 * 60 + 50;
+            const entries = days.map((dayName, index) => {
+                const day = new Date(weekStart);
+                day.setDate(day.getDate() + index);
+                const record = (week[getDateKey(day)] || {})[student.dataset.name];
+                let value = 'Not yet';
+                if (record) {
+                    value = record.time
+                        ? `${record.status} ${new Date(record.time).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}`
+                        : record.status;
+                } else if (getDateKey(day) < getDateKey(now) || (getDateKey(day) === getDateKey(now) && now.getHours() * 60 + now.getMinutes() >= closingMinutes)) {
+                    value = 'Absent';
+                }
+                return `<div><strong>${dayName}</strong><span>${value}</span></div>`;
+            }).join('');
+            student.querySelector('.weekly-attendance').innerHTML = entries;
+        }
+
+        function toggleAttendance(button) {
+            const box = button.parentElement.querySelector('.weekly-attendance');
+            box.classList.toggle('open');
+        }
+
+        function setActiveTab(button) {
+            document.querySelectorAll('#adminRecords .tab').forEach(tab => tab.classList.remove('active'));
+            button.classList.add('active');
+        }
+
+        function showStudents(status) {
+            updateAttendanceRecords();
+            document.querySelectorAll('#adminStudentList .student').forEach(student => {
+                const isPresent = student.dataset.status === 'present' || student.dataset.status === 'late';
+                student.style.display = !status || (status === 'present' ? isPresent : student.dataset.status === status)
+                    ? 'grid'
+                    : 'none';
+            });
+        }
+
+        function showAll() { showStudents(null); }
+        function showPresent() { showStudents('present'); }
+        function showAbsent() { showStudents('absent'); }
+
+        function goBack() {
+            // Go back to the page the user came from
+            if (document.referrer) {
+                history.back();
+            } else {
+                window.location.href = "index.html";
+            }
+        }
+
+        // Pressing Enter also submits the password
+        document.getElementById("passwordInput").addEventListener("keydown", function(event) {
+
+            if (event.key === "Enter") {
+                checkPassword();
+            }
+
+        });
+    </script>
+
+    <!--Bottom nav bar-->
+    <nav class="nav-bottom">
+        <a class="nav" href="classlist.html">Class List</a>
+        <a class="nav" href="index.html">Scanner</a>
+        <a class="nav" href="schedule.html">Schedule</a>
+        <a class="nav" href="admin.html">Admin</a>
+    </nav>
+</body>
+</html>

@@ -1,21 +1,37 @@
 * {
-    background-color: #6BB6AD;
+    background-color: #92C9C4;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+.img{
+    Height: 250px;
+    transform: translate(1050px, -0px);
+}
+
+.shark{
+    font-family: var(--font-text);
+    display: block;
+    color: #06322F;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: -550px;
+    margin-left: 1010px;
+}
+
 .pagetitle,
 .pagetitleschedule,
-.pagetitlelist {
-    color: #0a726b;
+.pagetitlelist,
+.admintitle {
+    font-family: "Merriweather", serif;
+    color: #06322F;
     font-size: 40px;
     text-align: center;
     padding: 14px 10px;
     margin: 15px auto 0;
     border-radius: 15px;
-    border: #131212 solid;
-    box-shadow: 5px 5px 10px 2px rgba(9, 95, 255, 0.3);
+    box-shadow: 5px 5px 10px 2px rgba(11, 225, 222, 0.3);
     display: block;
     width: fit-content;
     max-width: calc(100% - 20px);
@@ -26,9 +42,45 @@
     word-break: break-word;
 }
 
+@media (max-width: 480px) {
+    .pagetitle,
+    .pagetitleschedule,
+    .pagetitlelist {
+        font-size: 24px;
+        margin: 15px auto 0;
+        padding: 10px;
+        display: block;
+        width: 100%;
+        max-width: calc(100% - 12px);
+    }
+
+    .description {
+        font-size: 18px;
+        padding: 0 8px;
+    }
+
+    .tab {
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    .camera-button {
+        width: 100%;
+    }
+
+    .scannerpage {
+        padding-top: 20px;
+    }
+
+    .nav-bottom .nav {
+        font-size: 14px;
+    }
+
+}
+
 .description{
     font-size: 25px;
-    color: #0a726b;
+    color: #06322F;
     text-align: left;
     font-weight: bold;
     width: 100%;
@@ -41,17 +93,20 @@
 .trading {
     display: inline-block;
     font-weight: normal;
-    color: #0a726b;
+    color: #06322F;
 }
 
 body {
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: var(--font-text);
     min-height: 100vh;
     margin: 0;
     padding-bottom: 64px;
 }
 
 :root {
+    --font-text: "Open Sans", sans-serif;
+    --font-heading: "Merriweather", serif;
+
     --calendar-bg: #f4f9fb;
     --calendar-header-bg: #277070;
     --calendar-header-text: #ffffff;
@@ -78,11 +133,22 @@ body {
     justify-content: space-between;
     gap: 10px;
     margin: 20px 0 15px;
+    transform: translate(-440px, -75px);
+}
+
+@media (max-width: 1200px) {
+    .tabs {
+        transform: translate(0, 0);
+        justify-content: center;
+        margin: 20px auto 15px;
+        max-width: 500px;
+    }
 }
 
 .tab {
     flex: 1;
     padding: 10px;
+    font-family: var(--font-text);
     border: none;
     border-radius: 8px;
     background-color: #109990;
@@ -105,9 +171,18 @@ body {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
     flex-direction: column;
     gap: 10px;
+    transform: translateY(-50px);
+}
+
+@media (max-width: 480px) {
+    .tabs {
+        transform: translateY(40px);
+        margin-bottom: 105px;
+    }
 }
 
 .student {
@@ -119,6 +194,81 @@ body {
     padding: 12px 14px;
     border-radius: 8px;
     font-size: 15px;
+}
+
+.admin-records[hidden] {
+    display: none;
+}
+
+.records-heading {
+    color: #06322F;
+    font-family: var(--font-heading);
+    text-align: center;
+    margin: 10px 0 15px;
+}
+
+.admin-tabs {
+    transform: none;
+}
+
+.admin-records .student-list {
+    transform: none;
+}
+
+.attendance-time {
+    color: #06322F;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: right;
+}
+
+.admin-records .student {
+    display: grid;
+    grid-template-columns: 1fr auto;
+}
+
+.student-name {
+    border: 0;
+    background: transparent;
+    color: #104363;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+    padding: 0;
+    text-align: left;
+}
+
+.weekly-attendance {
+    background-color: #e6f8f6;
+    border-radius: 6px;
+    display: none;
+    grid-column: 1 / -1;
+    gap: 6px;
+    padding: 8px;
+    width: 100%;
+}
+
+.weekly-attendance.open {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.weekly-attendance div {
+    color: #06322F;
+    display: flex;
+    flex-direction: column;
+    font-size: 11px;
+    gap: 4px;
+}
+
+.weekly-attendance span {
+    color: #245d59;
+}
+
+@media (max-width: 480px) {
+    .attendance-time {
+        max-width: 45%;
+    }
 }
 
 .student .status {
@@ -175,10 +325,10 @@ body {
 }
 
 .c-button--gooey {
-    color: #0a726b;
+    color: #06322F;
     text-transform: uppercase;
     letter-spacing: 2px;
-    border: 4px solid #0a726b;
+    border: 4px solid #06322F;
     border-radius: 0;
     position: relative;
     transition: all 700ms ease;
@@ -205,7 +355,7 @@ body {
 }
 
 .c-button--gooey .c-button__blobs div {
-    background-color: #0a726b;
+    background-color: #06322F;
     width: 36%;
     height: 100%;
     border-radius: 100%;
@@ -229,7 +379,7 @@ body {
 }
 
 .c-button--gooey:hover {
-    color: #affaf5;
+    color: #06322F;
 }
 
 .c-button--gooey:hover .c-button__blobs div {
@@ -253,7 +403,7 @@ body {
 
 .scan-result {
     font-size: 16px;
-    color: #08655f;
+    color: #06322F;
     text-align: center;
     margin: 0;
     padding: 0 10px;
@@ -267,6 +417,7 @@ body {
     height: 56px;
     display: flex;
     justify-content: space-around;
+    font-family: var(--font-heading);
     align-items: center;
     background: #109990;
     z-index: 1000;
@@ -287,17 +438,18 @@ body {
 
 .calendar-wrap {
     display: flex;
-    gap: 20px;
+    gap: 40px;
     justify-content: center;
     align-items: flex-start;
     padding: 10px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .calendar {
-    font-family: sans-serif;
+    transform: translateY(30px);
+    font-family: var(--font-text);
     width: 100%;
-    max-width: 360px;
+    max-width: 425px;
     background: var(--calendar-bg);
     border-radius: 12px;
     overflow: hidden;
@@ -306,6 +458,7 @@ body {
 }
 
 .month {
+    font-family: var(--font-text);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -316,6 +469,7 @@ body {
 }
 
 .month-nav {
+    font-family: var(--font-text);
     background: transparent;
     color: #78c7c2;
     border: none;
@@ -330,6 +484,7 @@ body {
 }
 
 .weekdays div {
+    font-family: var(--font-text);
     font-weight: bold;
     padding: 8px 0;
     background: var(--calendar-weekday-bg);
@@ -343,6 +498,7 @@ body {
     cursor: pointer;
     position: relative;
     color: var(--calendar-text);
+    font-family: var(--font-text);
 }
 
 .days .empty {
@@ -376,13 +532,14 @@ body {
 }
 
 .event-panel {
+    transform: translateY(30px);
     flex: 1;
     width: 100%;
-    max-width: 320px;
-    min-width: 280px;
+    max-width: 380px;
+    min-width: 0px;
     background: var(--calendar-panel-bg);
     border-radius: 12px;
-    padding: 20px;
+    padding: 25px;
     color: var(--calendar-panel-text);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -434,6 +591,7 @@ body {
     padding: 10px 14px;
     cursor: pointer;
     font-weight: bold;
+    font-family: var(--font-text);
 }
 
 .save-btn:hover {
@@ -448,7 +606,7 @@ body {
 }
 
 .event-item {
-    background: #1897d2;
+    background: #7fddd7;
     border-left: 4px solid #0d7a5f;
     padding: 12px;
     margin-bottom: 12px;
@@ -464,6 +622,24 @@ body {
 .event-item small {
     display: block;
     color: #0d7a5f;
+}
+
+@media (max-width: 600px) {
+    .calendar-wrap {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .calendar {
+        width: 100%;
+        max-width: 360px;
+    }
+
+    .event-panel {
+        width: 100%;
+        max-width: 360px;
+        min-width: 0;
+    }
 }
 
 @media (max-width: 768px) {
@@ -504,38 +680,164 @@ body {
     }
 }
 
-@media (max-width: 480px) {
-    .pagetitle,
-    .pagetitleschedule,
-    .pagetitlelist {
-        font-size: 24px;
-        margin: 15px auto 0;
-        padding: 10px;
+@media (max-width: 600px) {
+    .tabs {
+        transform: translateY(40px);
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+
+    .student-list {
+        grid-template-columns: 1fr;
+        transform: translateY(0);
+        width: 100%;
+    }
+
+    .shark {
         display: block;
-        width: 100%;
-        max-width: calc(100% - 12px);
+        text-align: center;
+        margin: 30px auto 10px;
+        font-size: 22px;
+        transform: none;
     }
 
-    .description {
-        font-size: 18px;
-        padding: 0 8px;
-    }
-
-    .tab {
-        font-size: 13px;
-        padding: 8px;
-    }
-
-    .camera-button {
-        width: 100%;
-    }
-
-    .scannerpage {
-        padding-top: 20px;
-    }
-
-    .nav-bottom .nav {
-        font-size: 14px;
+    .img {
+        display: block;
+        width: 180px;
+        height: auto;
+        margin: 0 auto 80px;
+        transform: none;
     }
 }
 
+.password-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+
+.password-popup {
+    width: 100%;
+    max-width: 380px;
+    background: rgb(71, 167, 152);
+    padding: 30px;
+    border-radius: 18px;
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    animation: popupAppear 0.2s ease-out;
+}
+
+
+.password-popup h2 {
+    margin: 0 0 10px;
+    font-family: "Merriweather", serif;
+    font-size: 26px;
+}
+
+
+.password-popup p {
+    font-family: "Open Sans", sans-serif;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+
+#passwordInput {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: "Open Sans", sans-serif;
+    outline: none;
+}
+
+
+#passwordInput:focus {
+    border-color: #333;
+}
+
+.error-message {
+    color: #d32f2f !important;
+    font-size: 14px;
+    min-height: 18px;
+    margin: 8px 0 !important;
+}
+
+
+.popup-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+
+.popup-buttons button {
+    flex: 1;
+    padding: 13px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: "Open Sans", sans-serif;
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+
+.back-button {
+    background: #e5e5e5;
+
+    color: #222;
+}
+
+
+.enter-button {
+    background: #222;
+
+    color: white;
+}
+
+
+.popup-buttons button:active {
+    transform: scale(0.96);
+}
+
+
+/* Popup animation */
+
+@keyframes popupAppear {
+
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+.attendance-date {
+    text-align: center;
+    margin-top: -10px;
+    margin-bottom: 20px;
+    color: #777;
+    font-size: 14px;
+    font-family: var(--font-text);
+}

@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mobile App</title>
     <link rel="stylesheet" href="stylesmobile.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -47,6 +53,9 @@
             const scanResult = document.getElementById('scanResult');
             // creates a barcode scanner
             const codeReader = new ZXing.BrowserMultiFormatReader();
+            const scanStartMinutes = 8 * 60;
+            const lateStartMinutes = 8 * 60 + 40;
+            const scanEndMinutes = 8 * 60 + 50;
             // Stores the barcode numbers and matching student names
             const barcodeToName = {
                 '3123': 'Jack Allen',
@@ -67,8 +76,92 @@
             };
             let isCameraOn = false;
 
+            const currentAttendanceDate = getDateKey();
+            if (sessionStorage.getItem('attendanceDate') !== currentAttendanceDate) {
+                sessionStorage.removeItem('presentStudents');
+                sessionStorage.removeItem('attendanceRecords');
+                sessionStorage.setItem('attendanceDate', currentAttendanceDate);
+            }
+
+            function getDateKey(date = new Date()) {
+                return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+            }
+
+            function getWeekStart(date = new Date()) {
+                const weekStart = new Date(date);
+                const day = weekStart.getDay();
+                if (day === 0) {
+                    weekStart.setDate(weekStart.getDate() + 1);
+                } else if (day === 6) {
+                    weekStart.setDate(weekStart.getDate() + 2);
+                } else {
+                    weekStart.setDate(weekStart.getDate() - day + 1);
+                }
+                return getDateKey(weekStart);
+            }
+
+            function saveDailyAttendance(studentName, record) {
+                const weeklyAttendance = JSON.parse(localStorage.getItem('weeklyAttendance') || '{}');
+                const weekKey = getWeekStart();
+                const dateKey = getDateKey();
+                weeklyAttendance[weekKey] ||= {};
+                weeklyAttendance[weekKey][dateKey] ||= {};
+                weeklyAttendance[weekKey][dateKey][studentName] = record;
+                localStorage.setItem('weeklyAttendance', JSON.stringify(weeklyAttendance));
+            }
+
+            function finalizeDailyAttendance() {
+                const day = new Date().getDay();
+                if (day === 0 || day === 6) {
+                    return;
+                }
+                const weeklyAttendance = JSON.parse(localStorage.getItem('weeklyAttendance') || '{}');
+                const weekKey = getWeekStart();
+                const dateKey = getDateKey();
+                weeklyAttendance[weekKey] ||= {};
+                weeklyAttendance[weekKey][dateKey] ||= {};
+                Object.values(barcodeToName).forEach(studentName => {
+                    if (!weeklyAttendance[weekKey][dateKey][studentName]) {
+                        weeklyAttendance[weekKey][dateKey][studentName] = { status: 'Absent' };
+                    }
+                });
+                localStorage.setItem('weeklyAttendance', JSON.stringify(weeklyAttendance));
+            }
+
+            const now = new Date();
+            const closeTime = new Date(now);
+            closeTime.setHours(8, 50, 0, 0);
+            if (now < closeTime) {
+                window.setTimeout(finalizeDailyAttendance, closeTime - now);
+            } else if (now.getHours() * 60 + now.getMinutes() >= scanEndMinutes) {
+                finalizeDailyAttendance();
+            }
+
+            function getScanStatus() {
+                const now = new Date();
+                const minutes = now.getHours() * 60 + now.getMinutes();
+
+                if (minutes < scanStartMinutes) {
+                    return { allowed: false, message: 'Tutor scanning opens at 8:00 AM.' };
+                }
+                if (minutes >= scanEndMinutes) {
+                    return { allowed: false, message: 'Scanning closed at 8:50 AM.' };
+                }
+                return {
+                    allowed: true,
+                    status: minutes >= lateStartMinutes ? 'Late' : 'Present'
+                };
+            }
+
             //starts the cameras
             enableCameraBtn.addEventListener('click', async () => {
+                const scanStatus = getScanStatus();
+
+                if (!scanStatus.allowed) {
+                    scanResult.textContent = scanStatus.message;
+                    return;
+                }
+
                 if (isCameraOn) {
                     codeReader.reset();
                     camera.srcObject = null;
@@ -84,12 +177,29 @@
                                 //look for the students name 
                                 const studentName = barcodeToName[result.text];
                                 if (studentName) {
+                                    const currentScanStatus = getScanStatus();
+                                    if (!currentScanStatus.allowed) {
+                                        scanResult.textContent = currentScanStatus.message;
+                                        codeReader.reset();
+                                        camera.srcObject = null;
+                                        buttonLabel.textContent = 'Enable Camera';
+                                        isCameraOn = false;
+                                        return;
+                                    }
+
                                     const presentStudents = JSON.parse(sessionStorage.getItem('presentStudents') || '[]');
+                                    const attendanceRecords = JSON.parse(sessionStorage.getItem('attendanceRecords') || '{}');
                                     // stops duplicate scans so students can't scan there id card twice
                                     if (!presentStudents.includes(studentName)) {
                                         presentStudents.push(studentName);
                                         //saves the students name so it can be marked present on the class list page
                                         sessionStorage.setItem('presentStudents', JSON.stringify(presentStudents)); 
+                                        attendanceRecords[studentName] = {
+                                            time: new Date().toISOString(),
+                                            status: currentScanStatus.status
+                                        };
+                                        sessionStorage.setItem('attendanceRecords', JSON.stringify(attendanceRecords));
+                                        saveDailyAttendance(studentName, attendanceRecords[studentName]);
                                     }
                                     // when the id card is scanned it marks there name present
                                     sessionStorage.setItem('activeTab', 'present');
@@ -121,7 +231,7 @@
         <a class="nav" href="classlist.html">Class List</a>
         <a class="nav" href="index.html">Scanner</a>
         <a class="nav" href="schedule.html">Schedule</a>
-        <a class="nav" href="#">About</a>
+        <a class="nav" href="admin.html">Admin</a>
     </nav>
 
 </body>
