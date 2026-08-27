@@ -117,14 +117,16 @@ body {
     --calendar-header-text: #ffffff;
     --calendar-weekday-bg: #97cccc;
     --calendar-day-border: #74a9a9;
-    --calendar-day-bg: #A0DEDE;
-    --calendar-text: #017d75;
+    --calendar-day-bg: #A8E1E1;
+    --calendar-text: #013230;
     --calendar-today-bg: #0dcbcb;
     --calendar-selected-bg: #08e4d9;
     --calendar-selected-outline: #109990;
     --calendar-dot: #0d7a5f;
     --calendar-panel-bg: #71c8c0;
-    --calendar-panel-text: #02645d;
+    --calendar-panel-text: #022C2A;
+    --calendar-year-text: #013230;
+    --event-title-text: #022C2A;
 }
 
 .page {
@@ -156,7 +158,7 @@ body {
     font-family: var(--font-text);
     border: none;
     border-radius: 8px;
-    background-color: #109990;
+    background-color: #0B5651;
     color: #d4fbf8;
     font-size: 14px;
     cursor: pointer;
@@ -194,7 +196,7 @@ body {
     justify-content: space-between;
     align-items: center;
     background-color: #b5eeee;
-    color: #104363;
+    color: #06322F;
     padding: 12px 14px;
     border-radius: 8px;
     font-size: 15px;
@@ -234,7 +236,7 @@ body {
 .student-name {
     border: 0;
     background: transparent;
-    color: #104363;
+    color: #06322F;
     cursor: pointer;
     font: inherit;
     font-weight: 700;
@@ -427,7 +429,7 @@ body {
     z-index: 1000;
 }
 .nav-bottom .nav {
-    color: #A9D3CE;
+    color: #EAF5F4;
     background: #109990;
     font-size: 20px;
     text-decoration: none;
@@ -469,7 +471,7 @@ body {
     font-weight: bold;
     padding: 10px 12px;
     background: var(--calendar-header-bg);
-    color: #beebe5;
+    color: var(--calendar-year-text) ;
 }
 
 .month-nav {
@@ -551,9 +553,9 @@ body {
 .event-panel h2 {
     margin-top: 0;
     margin-bottom: 15px;
-    color: #04645e;
+    color: var(--event-title-text);
     font-size: 18px;
-    border-bottom: 2px solid #0a514c;
+    border-bottom: 3px solid #022C2A;
     padding-bottom: 10px;
 }
 
@@ -574,11 +576,12 @@ body {
 #eventForm textarea {
     width: 100%;
     padding: 8px 10px;
-    border: 1px solid #c9d6dd;
+    border: 1px solid #f1f1f1;
     border-radius: 6px;
     font-family: inherit;
     box-sizing: border-box;
-    background: #6dbcb6;
+    background: #5cbab3;
+    color: #014642;
 }
 
 #eventForm textarea {
@@ -588,8 +591,8 @@ body {
 
 .save-btn {
     margin-top: 8px;
-    background: #089087;
-    color: #9dd8d8;
+    background: #075A53;
+    color: #E7F4F4;
     border: none;
     border-radius: 6px;
     padding: 10px 14px;
@@ -732,7 +735,7 @@ body {
 .password-popup {
     width: 100%;
     max-width: 380px;
-    background: rgb(71, 167, 152);
+    background: rgb(98, 188, 174);
     padding: 30px;
     border-radius: 18px;
     box-sizing: border-box;
@@ -751,7 +754,7 @@ body {
 
 .password-popup p {
     font-family: "Open Sans", sans-serif;
-    color: #666;
+    color: #181818;
     margin-bottom: 20px;
 }
 
@@ -760,7 +763,7 @@ body {
     width: 100%;
     box-sizing: border-box;
     padding: 14px 15px;
-    border: 1px solid #ccc;
+    border: 1px solid #f0ecec;
     border-radius: 10px;
     font-size: 16px;
     font-family: "Open Sans", sans-serif;
@@ -769,7 +772,7 @@ body {
 
 
 #passwordInput:focus {
-    border-color: #333;
+    border-color: #e4e2e2;
 }
 
 .error-message {
@@ -800,16 +803,13 @@ body {
 
 
 .back-button {
-    background: #e5e5e5;
-
-    color: #222;
+    background: #dee7e6;
+    color: #111111;
 }
 
-
 .enter-button {
-    background: #222;
-
-    color: white;
+    background: #043f3a;
+    color: rgb(243, 241, 241);
 }
 
 
@@ -838,7 +838,7 @@ body {
     text-align: center;
     margin-top: -10px;
     margin-bottom: 20px;
-    color: #777;
+    color: #203a38;
     font-size: 14px;
     font-family: var(--font-text);
 }
