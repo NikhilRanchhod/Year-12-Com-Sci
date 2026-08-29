@@ -20,6 +20,8 @@
     <div class="page-content">
         <!--Page title-->
         <h1 class="pagetitleschedule">Schedule</h1>
+        <p class="planningdescription">Plan Your Events and Manage Your Schedule Here:</p>
+        <p class="eventinstructions">Select a date and fill in the boxes to start planning:</p>
         <!--Calendar and event section-->
         <div class="calendar-wrap">
              <!--calendar section-->
@@ -27,11 +29,11 @@
                  <!--sorting months-->
                 <div class="month">
                      <!-- button to back a month-->
-                    <button class="month-nav" onclick="changeMonth(-1)">&#10094;</button>
+                    <button type="button" class="month-nav" onclick="changeMonth(-1)">&#10094;</button>
                      <!--shows the current year and month-->
                     <span id="monthLabel">July 2026</span>
                      <!--button to go to the next month-->
-                    <button class="month-nav" onclick="changeMonth(1)">&#10095;</button>
+                    <button type="button" class="month-nav" onclick="changeMonth(1)">&#10095;</button>
                 </div>
                 <!--shows the days of the week-->
                 <div class="weekdays">
@@ -66,9 +68,17 @@
     <script>
         //get todays date
         const today = new Date();
+        const maxPlanningDate = new Date(today.getFullYear() + 1, today.getMonth(), 1);
         //stores the current month and year
         let currentDate = new Date(today.getFullYear(), today.getMonth(), 1);
         let selectedDate = null;
+
+        function isDateInPlanningWindow(date) {
+            if (!date) return false;
+            const normalizedDate = new Date(date.getFullYear(), date.getMonth(), 1);
+            const earliestAllowed = new Date(today.getFullYear(), today.getMonth(), 1);
+            return normalizedDate >= earliestAllowed && normalizedDate <= maxPlanningDate;
+        }
         //loads the calendar events from storage
         let events = JSON.parse(localStorage.getItem('calendarEvents') || '{}');
         // make the date into a readable format 
@@ -87,10 +97,13 @@
             // gets the month and year to display on the calendar
             const monthLabel = document.getElementById('monthLabel');
             const daysGrid = document.getElementById('daysGrid');
+            const navButtons = document.querySelectorAll('.month-nav');
             // months
             const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             //shows the current month
             monthLabel.textContent = `${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
+            // disables next button once the calendar reaches the one-year planning limit
+            navButtons[1].disabled = currentDate >= maxPlanningDate;
             // unhighlights the bay before
             daysGrid.innerHTML = '';
             //finds the first day the month starts on 
@@ -176,6 +189,12 @@
                 alert('Please select a date first.');
                 return;
             }
+
+            const selectedCalendarDate = new Date(selectedDate + 'T00:00:00');
+            if (!isDateInPlanningWindow(selectedCalendarDate)) {
+                alert('You can only plan up to one year in advance.');
+                return;
+            }
             // gets information entered the form 
             const title = document.getElementById('eventTitle').value.trim();
             const time = document.getElementById('eventTime').value;
@@ -203,7 +222,13 @@
         }
         // changes the month when the user clicks next or back button   
         function changeMonth(offset) {
-            currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + offset, 1);
+            const proposedDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + offset, 1);
+            if (offset > 0 && proposedDate > maxPlanningDate) {
+                currentDate = new Date(maxPlanningDate.getFullYear(), maxPlanningDate.getMonth(), 1);
+                renderCalendar();
+                return;
+            }
+            currentDate = proposedDate;
             renderCalendar();
         }
         // displays calendar when page loads

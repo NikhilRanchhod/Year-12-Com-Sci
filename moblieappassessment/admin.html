@@ -21,14 +21,15 @@
         <div class="password-popup">
             <h2>Records</h2>
             <p>Enter the password to access this page.</p>
+            <label for="passwordInput">Enter Password:</label>
             <input type="password" id="passwordInput" placeholder="Password" autocomplete="off">
 
             <p id="errorMessage" class="error-message"></p>
             <div class="popup-buttons">
-                <button class="back-button" onclick="goBack()">
+                <button type="button" class="back-button" onclick="goBack()">
                     Take Me Back
                 </button>
-                <button class="enter-button" onclick="checkPassword()">
+                <button type="button" class="enter-button" onclick="checkPassword()">
                     Enter
                 </button>
             </div>
@@ -40,26 +41,26 @@
         <p id="attendanceDate" class="attendance-date"></p>
 
         <div class="tabs admin-tabs">
-            <button class="tab active" onclick="setActiveTab(this); showAll()">All</button>
-            <button class="tab" onclick="setActiveTab(this); showPresent()">Present</button>
-            <button class="tab" onclick="setActiveTab(this); showAbsent()">Absent</button>
+            <button type="button" class="tab active" onclick="setActiveTab(this); showAll()">All</button>
+            <button type="button" class="tab" onclick="setActiveTab(this); showPresent()">Present</button>
+            <button type="button" class="tab" onclick="setActiveTab(this); showAbsent()">Absent</button>
         </div>
         <ul class="student-list" id="adminStudentList">
-            <li class="student" data-name="Jack Allen"><button class="student-name" onclick="toggleAttendance(this)">Jack Allen</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
-            <li class="student" data-name="Liam Berryman"><button class="student-name" onclick="toggleAttendance(this)">Liam Berryman</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
-            <li class="student" data-name="Alastair Cheneka"><button class="student-name" onclick="toggleAttendance(this)">Alastair Cheneka</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
-            <li class="student" data-name="Bowen Dong"><button class="student-name" onclick="toggleAttendance(this)">Bowen Dong</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
-            <li class="student" data-name="Oscar Gu"><button class="student-name" onclick="toggleAttendance(this)">Oscar Gu</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
-            <li class="student" data-name="Leith Harris"><button class="student-name" onclick="toggleAttendance(this)">Leith Harris</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
-            <li class="student" data-name="Matthew Holmes"><button class="student-name" onclick="toggleAttendance(this)">Matthew Holmes</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
-            <li class="student" data-name="Timothy Kavalenka"><button class="student-name" onclick="toggleAttendance(this)">Timothy Kavalenka</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
-            <li class="student" data-name="Andrew Li"><button class="student-name" onclick="toggleAttendance(this)">Andrew Li</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
-            <li class="student" data-name="Maodong Li"><button class="student-name" onclick="toggleAttendance(this)">Maodong Li</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
-            <li class="student" data-name="Kevin Luo"><button class="student-name" onclick="toggleAttendance(this)">Kevin Luo</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
-            <li class="student" data-name="Harry Parfoot"><button class="student-name" onclick="toggleAttendance(this)">Harry Parfoot</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
-            <li class="student" data-name="Nikhil Ranchhod"><button class="student-name" onclick="toggleAttendance(this)">Nikhil Ranchhod</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
-            <li class="student" data-name="Angus Watson"><button class="student-name" onclick="toggleAttendance(this)">Angus Watson</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
-            <li class="student" data-name="Oliver Wood"><button class="student-name" onclick="toggleAttendance(this)">Oliver Wood</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
+            <li class="student" data-name="Jack Allen"><button type="button" class="student-name" onclick="toggleAttendance(this)">Jack Allen</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
+            <li class="student" data-name="Liam Berryman"><button type="button" class="student-name" onclick="toggleAttendance(this)">Liam Berryman</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
+            <li class="student" data-name="Alastair Cheneka"><button type="button" class="student-name" onclick="toggleAttendance(this)">Alastair Cheneka</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
+            <li class="student" data-name="Bowen Dong"><button type="button" class="student-name" onclick="toggleAttendance(this)">Bowen Dong</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
+            <li class="student" data-name="Oscar Gu"><button type="button" class="student-name" onclick="toggleAttendance(this)">Oscar Gu</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
+            <li class="student" data-name="Leith Harris"><button type="button" class="student-name" onclick="toggleAttendance(this)">Leith Harris</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
+            <li class="student" data-name="Matthew Holmes"><button type="button" class="student-name" onclick="toggleAttendance(this)">Matthew Holmes</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
+            <li class="student" data-name="Timothy Kavalenka"><button type="button" class="student-name" onclick="toggleAttendance(this)">Timothy Kavalenka</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
+            <li class="student" data-name="Andrew Li"><button type="button" class="student-name" onclick="toggleAttendance(this)">Andrew Li</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
+            <li class="student" data-name="Maodong Li"><button type="button" class="student-name" onclick="toggleAttendance(this)">Maodong Li</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
+            <li class="student" data-name="Kevin Luo"><button type="button" class="student-name" onclick="toggleAttendance(this)">Kevin Luo</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
+            <li class="student" data-name="Harry Parfoot"><button type="button" class="student-name" onclick="toggleAttendance(this)">Harry Parfoot</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
+            <li class="student" data-name="Nikhil Ranchhod"><button type="button" class="student-name" onclick="toggleAttendance(this)">Nikhil Ranchhod</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
+            <li class="student" data-name="Angus Watson"><button type="button" class="student-name" onclick="toggleAttendance(this)">Angus Watson</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
+            <li class="student" data-name="Oliver Wood"><button type="button" class="student-name" onclick="toggleAttendance(this)">Oliver Wood</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
         </ul>
     </main>
 

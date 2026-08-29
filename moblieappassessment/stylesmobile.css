@@ -31,11 +31,12 @@
     padding: 14px 10px;
     margin: 15px auto 0;
     border-radius: 15px;
-    box-shadow: 5px 5px 10px 2px rgba(11, 225, 222, 0.3);
+    text-decoration: underline wavy rgb(253, 252, 252);
+    text-decoration-thickness: 2px;
     display: block;
     width: fit-content;
     max-width: calc(100% - 20px);
-    margin-left: auto;
+    margin-left: auto;  
     margin-right: auto;
     overflow-wrap: break-word;
     word-break: break-word;
@@ -116,7 +117,7 @@ body {
     --calendar-header-bg: #277070;
     --calendar-header-text: #ffffff;
     --calendar-weekday-bg: #97cccc;
-    --calendar-day-border: #74a9a9;
+    --calendar-day-border: #ffffff;
     --calendar-day-bg: #A8E1E1;
     --calendar-text: #013230;
     --calendar-today-bg: #0dcbcb;
@@ -200,6 +201,7 @@ body {
     padding: 12px 14px;
     border-radius: 8px;
     font-size: 15px;
+    border: solid #ffffff 2px;
 }
 
 .admin-records[hidden] {
@@ -315,7 +317,7 @@ body {
 
 .c-button {
     color: #000;
-    font-weight: 700;
+    font-weight: 400;
     font-size: 16px;
     text-decoration: none;
     padding: 0.9em 1.6em;
@@ -514,13 +516,30 @@ body {
 }
 
 .today {
-    background-color: var(--calendar-today-bg) !important;
+    background-color: var(--calendar-today-bg);
     font-weight: bold;
 }
 
 .selected-day {
-    background: var(--calendar-selected-bg) !important;
+    background: var(--calendar-selected-bg);
     box-shadow: inset 0 0 0 2px var(--calendar-selected-outline);
+}
+
+.planningdescription{
+    font-size: 20px;
+    font-family: var(--font-text);
+    color: #072e2c;
+    text-align: center;
+    font-weight: 700;
+    
+}
+
+.eventinstructions{
+    font-family: var(--font-text);
+    color: #072e2c;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
 }
 
 .event-dot {
@@ -578,7 +597,7 @@ body {
     padding: 8px 10px;
     border: 1px solid #f1f1f1;
     border-radius: 6px;
-    font-family: inherit;
+    font-family: var(--font-text);
     box-sizing: border-box;
     background: #5cbab3;
     color: #014642;
@@ -776,10 +795,10 @@ body {
 }
 
 .error-message {
-    color: #d32f2f !important;
+    color: #d32f2f;
     font-size: 14px;
     min-height: 18px;
-    margin: 8px 0 !important;
+    margin: 8px 0;
 }
 
 
@@ -817,8 +836,6 @@ body {
     transform: scale(0.96);
 }
 
-
-/* Popup animation */
 
 @keyframes popupAppear {
 
