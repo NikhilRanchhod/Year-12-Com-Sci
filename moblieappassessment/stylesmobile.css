@@ -1,112 +1,8 @@
 * {
-    background-color: #92C9C4;
+    background-color: var(--background-color);
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-.img{
-    Height: 250px;
-    transform: translate(1050px, -0px);
-}
-
-.shark{
-    font-family: var(--font-text);
-    display: block;
-    color: #06322F;
-    font-size: 24px;
-    font-weight: bold;
-    margin-top: -550px;
-    margin-left: 1010px;
-}
-
-.pagetitle,
-.pagetitleschedule,
-.pagetitlelist,
-.admintitle {
-    font-family: "Merriweather", serif;
-    color: #06322F;
-    font-size: 40px;
-    text-align: center;
-    padding: 14px 10px;
-    margin: 15px auto 0;
-    border-radius: 15px;
-    text-decoration: underline wavy rgb(253, 252, 252);
-    text-decoration-thickness: 2px;
-    display: block;
-    width: fit-content;
-    max-width: calc(100% - 20px);
-    margin-left: auto;  
-    margin-right: auto;
-    overflow-wrap: break-word;
-    word-break: break-word;
-}
-
-@media (max-width: 1176px){
-    .tabs{
-        padding-bottom: 50px;
-    }
-}
-
-@media (max-width: 480px) {
-    .pagetitle,
-    .pagetitleschedule,
-    .pagetitlelist {
-        font-size: 24px;
-        margin: 15px auto 0;
-        padding: 10px;
-        display: block;
-        width: 100%;
-        max-width: calc(100% - 12px);
-    }
-
-    .description {
-        font-size: 18px;
-        padding: 0 8px;
-    }
-
-    .tab {
-        font-size: 13px;
-        padding: 8px;
-    }
-
-    .camera-button {
-        width: 100%;
-    }
-
-    .scannerpage {
-        padding-top: 20px;
-    }
-
-    .nav-bottom .nav {
-        font-size: 14px;
-    }
-
-}
-
-.description{
-    font-size: 25px;
-    color: #06322F;
-    text-align: left;
-    font-weight: bold;
-    width: 100%;
-    max-width: 500px;
-    margin: 120px auto 0;
-    padding: 0 10px;
-    margin-top: 20px;
-}
-
-.trading {
-    display: inline-block;
-    font-weight: normal;
-    color: #06322F;
-}
-
-body {
-    font-family: var(--font-text);
-    min-height: 100vh;
-    margin: 0;
-    padding-bottom: 64px;
 }
 
 :root {
@@ -123,11 +19,122 @@ body {
     --calendar-today-bg: #0dcbcb;
     --calendar-selected-bg: #08e4d9;
     --calendar-selected-outline: #109990;
-    --calendar-dot: #0d7a5f;
+    --calendar-dot: #FCE80E;
     --calendar-panel-bg: #71c8c0;
     --calendar-panel-text: #022C2A;
     --calendar-year-text: #013230;
     --event-title-text: #022C2A;
+    --background-color: #92C9C4;
+    --month-nav-color: #78c7c2;
+    --event-item-background-color:#FCF06C;
+    --event-border-left: #3a6c73;
+    --event-item-text: #0d7a5f;
+
+    --text-color: #06322F;
+
+    --text-decoration: #ffffff;
+
+    --tab-color: #0B5651;
+    --tab-text-color: #d4fbf8;
+    --tab-active: #016b64;
+    --tab-hover: #016d66;
+
+    --student-background-color: #b5eeee;
+    --status-present: #b5eeee;
+    --status-absent: #93d6d6;
+
+    --weekly-attendance-background-color: #e6f8f6;
+    --weekly-attendance-color: #245d59;
+    
+    --camera-color: #060606;
+    --camera-border-color: #109990;
+
+    --nav-bar-background-color: #109990;
+    --nav-text-color: #ffffff;
+    --nav-hover-color: #03877f;
+
+    --input-background-color: #78c7c2;
+    --input-text-color: #014642;
+    --save-button-background: #075A53;
+    --save-text-color: #E7F4F4;
+    --save-button-hover: #095f59f0;
+
+    --admin-password-popup-background-color: rgb(98, 188, 174);
+    --admin-password-popup-text: #181818;
+    --admin-back-button-background: #dee7e6;
+    --admin-back-button-text-color: #111111;
+    --admin-enter-background-color: #043f3a;
+    --admin-enter-button-text-color: rgb(243, 241, 241);
+
+    --records-date-text-color: #203a38;
+    
+}
+
+.img{
+position: absolute;
+top: 245px;
+left: 71%;
+width: 325px;
+height: auto;
+transform: none;
+}
+
+.shark{
+position: absolute;
+top: 210px;
+left: 68%;
+font-family: var(--font-text);
+color: var(--text-color);
+font-size: 30px;
+font-weight: bold;
+margin: 0;
+}
+
+.pagetitle,
+.pagetitleschedule,
+.pagetitlelist,
+.admintitle {
+    font-family: "Merriweather", serif;
+    color: var(--text-color);
+    font-size: 40px;
+    text-align: center;
+    padding: 14px 10px;
+    margin: 15px auto 0;
+    border-radius: 15px;
+    text-decoration: underline wavy var(--text-decoration);
+    text-decoration-thickness: 2px;
+    display: block;
+    width: fit-content;
+    max-width: calc(100% - 20px);
+    margin-left: auto;  
+    margin-right: auto;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.description{
+    font-size: 25px;
+    color: var(--text-color);
+    text-align: left;
+    font-weight: bold;
+    width: 100%;
+    max-width: 500px;
+    margin: 120px auto 0;
+    padding: 0 10px;
+    margin-top: 20px;
+}
+
+.trading {
+    display: inline-block;
+    font-weight: normal;
+    color: var(--calendar--bg);
+}
+
+body {
+    font-family: var(--font-text);
+    min-height: 100vh;
+    margin: 0;
+    padding-bottom: 64px;
 }
 
 .page {
@@ -141,16 +148,14 @@ body {
     justify-content: space-between;
     gap: 10px;
     margin: 20px 0 15px;
+}
+
+.class-page .tabs {
     transform: translate(-440px, -75px);
 }
 
-@media (max-width: 1200px) {
-    .tabs {
-        transform: translate(0, 0);
-        justify-content: center;
-        margin: 20px auto 15px;
-        max-width: 500px;
-    }
+.admin-page .tabs {
+    transform: none;
 }
 
 .tab {
@@ -159,20 +164,20 @@ body {
     font-family: var(--font-text);
     border: none;
     border-radius: 8px;
-    background-color: #0B5651;
-    color: #d4fbf8;
+    background-color: var(--tab-color);
+    color: var(--tab-text-color);
     font-size: 14px;
     cursor: pointer;
 }
 
 .tab.active {
-    background-color: #016b64;
+    background-color: var(--tab-active);
     font-weight: bold;
     box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.2);
 }
 
 .tab:hover {
-    background-color: #016d66;
+    background-color: var(--tab-hover);
 }
 
 .student-list {
@@ -182,26 +187,26 @@ body {
     display: grid;
     grid-template-columns: repeat(2,1fr);
     gap: 10px;
-    transform: translateY(-50px);
 }
 
-@media (max-width: 480px) {
-    .tabs {
-        transform: translateY(40px);
-        margin-bottom: 105px;
-    }
+.class-page .student-list {
+    transform: none;
+}
+
+.admin-page .student-list {
+    transform: none;
 }
 
 .student {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #b5eeee;
-    color: #06322F;
+    background-color: var(--student-background-color);
+    color: var(--text-color);
     padding: 12px 14px;
     border-radius: 8px;
     font-size: 15px;
-    border: solid #ffffff 2px;
+    border: solid var(--text-decoration) 2px;
 }
 
 .admin-records[hidden] {
@@ -209,7 +214,7 @@ body {
 }
 
 .records-heading {
-    color: #06322F;
+    color: var(--text-color);
     font-family: var(--font-heading);
     text-align: center;
     margin: 10px 0 15px;
@@ -224,10 +229,18 @@ body {
 }
 
 .attendance-time {
-    color: #06322F;
+    color: var(--text-color);
     font-size: 12px;
     font-weight: 700;
     text-align: right;
+}
+
+.admin-records .attendance-time {
+    background-color: var(--status-absent);
+    color: var(--text-color);
+    padding: 4px 8px;
+    justify-self: end;
+    min-width: max-content;
 }
 
 .admin-records .student {
@@ -238,7 +251,7 @@ body {
 .student-name {
     border: 0;
     background: transparent;
-    color: #06322F;
+    color: var(--text-color);
     cursor: pointer;
     font: inherit;
     font-weight: 700;
@@ -247,7 +260,7 @@ body {
 }
 
 .weekly-attendance {
-    background-color: #e6f8f6;
+    background-color: var(--weekly-attendance-background-color);
     border-radius: 6px;
     display: none;
     grid-column: 1 / -1;
@@ -262,7 +275,7 @@ body {
 }
 
 .weekly-attendance div {
-    color: #06322F;
+    color: var(--text-color);
     display: flex;
     flex-direction: column;
     font-size: 11px;
@@ -270,13 +283,7 @@ body {
 }
 
 .weekly-attendance span {
-    color: #245d59;
-}
-
-@media (max-width: 480px) {
-    .attendance-time {
-        max-width: 45%;
-    }
+    color: var(--weekly-attendance-color);
 }
 
 .student .status {
@@ -292,15 +299,15 @@ body {
     border-radius: 999px;
     font-size: 12px;
     font-weight: bold;
-    color: white;
+    color: var(--text-decoration);
 }
 
 .status.present {
-    background-color: #248e52;
+    background-color: var(--status-present);
 }
 
 .status.absent {
-    background-color: #ba3737;
+    background-color: var(--status-absent);
 }
 
 .scannerpage {
@@ -316,7 +323,7 @@ body {
 }
 
 .c-button {
-    color: #000;
+    color: var(--camera-color);
     font-weight: 400;
     font-size: 16px;
     text-decoration: none;
@@ -333,10 +340,10 @@ body {
 }
 
 .c-button--gooey {
-    color: #06322F;
+    color: var(--text-color);
     text-transform: uppercase;
     letter-spacing: 2px;
-    border: 4px solid #06322F;
+    border: 4px solid var(--text-color);
     border-radius: 0;
     position: relative;
     transition: all 700ms ease;
@@ -363,7 +370,7 @@ body {
 }
 
 .c-button--gooey .c-button__blobs div {
-    background-color: #06322F;
+    background-color: var(--text-color);
     width: 36%;
     height: 100%;
     border-radius: 100%;
@@ -387,7 +394,7 @@ body {
 }
 
 .c-button--gooey:hover {
-    color: #06322F;
+    color: var(--text-color);
 }
 
 .c-button--gooey:hover .c-button__blobs div {
@@ -403,15 +410,15 @@ body {
     width: 100%;
     max-width: 500px;
     height: auto;
-    border: 5px solid #109990;
+    border: 5px solid var(--camera-border-color);
     border-radius: 8px;
-    background-color: #000;
+    background-color: var(--camera-color);
     text-align: center;
 }
 
 .scan-result {
-    font-size: 16px;
-    color: #06322F;
+    font-size: 16px; 
+    color: var(--text-color);
     text-align: center;
     margin: 0;
     padding: 0 10px;
@@ -427,19 +434,20 @@ body {
     justify-content: space-around;
     font-family: var(--font-heading);
     align-items: center;
-    background: #109990;
+    background: var(--nav-bar-background-color);
     z-index: 1000;
 }
+
 .nav-bottom .nav {
-    color: #EAF5F4;
-    background: #109990;
+    color: var(--nav-text-color);
+    background: var(--nav-bar-background-color);
     font-size: 20px;
     text-decoration: none;
    
 }
 
 .nav-bottom .nav:hover {
-    background-color: #03877f;
+    background-color: var(--nav-hover-color);
     border-radius: 8px;
     padding: 6px 10px;
 }
@@ -462,7 +470,6 @@ body {
     border-radius: 12px;
     overflow: hidden;
     color: var(--calendar-text);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .month {
@@ -479,7 +486,7 @@ body {
 .month-nav {
     font-family: var(--font-text);
     background: transparent;
-    color: #78c7c2;
+    color: var(--month-nav-color);
     border: none;
     font-size: 16px;
     cursor: pointer;
@@ -528,7 +535,7 @@ body {
 .planningdescription{
     font-size: 20px;
     font-family: var(--font-text);
-    color: #072e2c;
+    color: var(--text-color);
     text-align: center;
     font-weight: 700;
     
@@ -536,7 +543,7 @@ body {
 
 .eventinstructions{
     font-family: var(--font-text);
-    color: #072e2c;
+    color: var(--text-color);
     text-align: center;
     font-size: 16px;
     font-weight: 500;
@@ -566,7 +573,6 @@ body {
     border-radius: 12px;
     padding: 25px;
     color: var(--calendar-panel-text);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .event-panel h2 {
@@ -574,7 +580,7 @@ body {
     margin-bottom: 15px;
     color: var(--event-title-text);
     font-size: 18px;
-    border-bottom: 3px solid #022C2A;
+    border-bottom: 3px solid var(--text-color);
     padding-bottom: 10px;
 }
 
@@ -595,12 +601,12 @@ body {
 #eventForm textarea {
     width: 100%;
     padding: 8px 10px;
-    border: 1px solid #f1f1f1;
+    border: 1px solid var(--text-decoration);
     border-radius: 6px;
     font-family: var(--font-text);
     box-sizing: border-box;
-    background: #5cbab3;
-    color: #014642;
+    background: var(--input-background-color);
+    color: var(--input-text-color);
 }
 
 #eventForm textarea {
@@ -610,8 +616,8 @@ body {
 
 .save-btn {
     margin-top: 8px;
-    background: #075A53;
-    color: #E7F4F4;
+    background: var(--save-button-background);
+    color: var(--save-text-color);
     border: none;
     border-radius: 6px;
     padding: 10px 14px;
@@ -621,7 +627,7 @@ body {
 }
 
 .save-btn:hover {
-    background: #095f59f0;
+    background: var(--save-button-hover);
 }
 
 .event-list {
@@ -632,12 +638,11 @@ body {
 }
 
 .event-item {
-    background: #7fddd7;
-    border-left: 4px solid #0d7a5f;
+    background: var(--event-item-background-color);
+    border-left: 4px solid var(--event-border-left);
     padding: 12px;
     margin-bottom: 12px;
     border-radius: 6px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .event-item strong {
@@ -647,7 +652,216 @@ body {
 
 .event-item small {
     display: block;
-    color: #0d7a5f;
+    color: var(--event-item-text);
+}
+
+.password-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+
+.password-popup {
+    width: 100%;
+    max-width: 380px;
+    background: var(--admin-password-popup-background-color);
+    padding: 30px;
+    border-radius: 18px;
+    box-sizing: border-box;
+    text-align: center;
+    animation: popupAppear 0.2s ease-out;
+}
+
+
+.password-popup h2 {
+    margin: 0 0 10px;
+    font-family: var(--font-heading);
+    font-size: 26px;
+}
+
+
+.password-popup p {
+    font-family: "Open Sans", sans-serif;
+    color: var(--admin-password-popup-text);
+    margin-bottom: 20px;
+}
+
+
+#passwordInput {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 15px;
+    border: 1px solid var(--text-decoration);
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: "Open Sans", sans-serif;
+    outline: none;
+}
+
+
+#passwordInput:focus {
+    border-color: var(--text-decoration);
+}
+
+.error-message {
+    font-size: 14px;
+    min-height: 18px;
+    margin: 8px 0;
+}
+
+
+.popup-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+
+.popup-buttons button {
+    flex: 1;
+    padding: 13px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: "Open Sans", sans-serif;
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+
+.back-button {
+    background: var(--admin-back-button-background);
+    color: var(--admin-back-button-text-color);
+}
+
+.enter-button {
+    background: var(--admin-enter-background-color);
+    color: var(--admin-enter-button-text-color);
+}
+
+
+.popup-buttons button:active {
+    transform: scale(0.96);
+}
+
+.attendance-date {
+    text-align: center;
+    margin-top: -10px;
+    margin-bottom: 20px;
+    color: var(--records-date-text-color);
+    font-size: 14px;
+    font-family: var(--font-text);
+}
+
+@keyframes popupAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 1176px){
+    .class-page .tabs,
+    .admin-page .tabs {
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .pagetitle,
+    .pagetitleschedule,
+    .pagetitlelist {
+        font-size: 24px;
+        margin: 15px auto 0;
+        padding: 10px;
+        display: block;
+        width: 100%;
+        max-width: calc(100% - 12px);
+    }
+
+    .description {
+        font-size: 18px;
+        padding: 0 8px;
+    }
+
+    .tab {
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    .camera-button {
+        width: 100%;
+    }
+
+    .scannerpage {
+        padding-top: 20px;
+    }
+
+    .nav-bottom .nav {
+        font-size: 14px;
+    }
+
+}
+
+@media (max-width: 1200px) {
+    .class-page .tabs,
+    .admin-page .tabs {
+        transform: translate(0, 0);
+        justify-content: center;
+        margin: 20px auto 15px;
+        max-width: 500px;
+    }
+}
+
+@media (max-width: 1300px){
+    .shark {
+        position: static;
+        display: block;
+        text-align: center;
+        margin: 30px auto 10px;
+        font-size: 22px;
+    }
+
+    .img {
+        position: static;
+        display: block;
+        width: 180px;
+        height: auto;
+        margin: 0 auto 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tabs {
+        transform: translateY(40px);
+        margin-bottom: 105px;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1440px) {
+    .class-page .student-list {
+        transform: translateY(-60px);
+    }
+}
+
+@media (max-width: 480px) {
+    .attendance-time {
+        max-width: 45%;
+    }
 }
 
 @media (max-width: 768px) {
@@ -689,18 +903,20 @@ body {
 }
 
 @media (max-width: 600px) {
-    .tabs {
-        transform: translateY(40px);
+    .class-page .tabs,
+    .admin-page .tabs {
+        transform: none;
         justify-content: center;
-        margin-left: auto;
-        margin-right: auto;
+        margin: 20px auto 15px;
         width: 100%;
     }
 
-    .student-list {
+    .class-page .student-list,
+    .admin-page .student-list {
         grid-template-columns: 1fr;
-        transform: translateY(0);
+        transform: none;
         width: 100%;
+        margin-top: 0;
     }
 
     .shark {
@@ -735,127 +951,216 @@ body {
     }
 }
 
-.password-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.65);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    padding: 20px;
-    box-sizing: border-box;
-}
+@media (min-width: 630px) {
 
-
-.password-popup {
-    width: 100%;
-    max-width: 380px;
-    background: rgb(98, 188, 174);
-    padding: 30px;
-    border-radius: 18px;
-    box-sizing: border-box;
-    text-align: center;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-    animation: popupAppear 0.2s ease-out;
-}
-
-
-.password-popup h2 {
-    margin: 0 0 10px;
-    font-family: "Merriweather", serif;
-    font-size: 26px;
-}
-
-
-.password-popup p {
-    font-family: "Open Sans", sans-serif;
-    color: #181818;
-    margin-bottom: 20px;
-}
-
-
-#passwordInput {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 14px 15px;
-    border: 1px solid #f0ecec;
-    border-radius: 10px;
-    font-size: 16px;
-    font-family: "Open Sans", sans-serif;
-    outline: none;
-}
-
-
-#passwordInput:focus {
-    border-color: #e4e2e2;
-}
-
-.error-message {
-    color: #d32f2f;
-    font-size: 14px;
-    min-height: 18px;
-    margin: 8px 0;
-}
-
-
-.popup-buttons {
-    display: flex;
-    gap: 10px;
-    margin-top: 15px;
-}
-
-
-.popup-buttons button {
-    flex: 1;
-    padding: 13px;
-    border: none;
-    border-radius: 10px;
-    font-size: 15px;
-    font-family: "Open Sans", sans-serif;
-    cursor: pointer;
-    transition: 0.15s;
-}
-
-
-.back-button {
-    background: #dee7e6;
-    color: #111111;
-}
-
-.enter-button {
-    background: #043f3a;
-    color: rgb(243, 241, 241);
-}
-
-
-.popup-buttons button:active {
-    transform: scale(0.96);
-}
-
-
-@keyframes popupAppear {
-
-    from {
-        opacity: 0;
-        transform: scale(0.9);
+    .pagetitle {
+        font-size: 55px;
+        padding: 20px 15px;
     }
 
-    to {
-        opacity: 1;
-        transform: scale(1);
+    .description {
+        font-size: 35px;
+        max-width: 700px;
+        margin-top: 30px;
+    }
+
+    .trading {
+        font-size: 35px;
+    }
+
+    .scannerpage {
+        max-width: 700px;
+        padding-top: 50px;
+    }
+
+    #camera {
+        min-width: 600px;
+        min-height: 300px;
+        border-width: 7px;
+    }
+
+    .c-button {
+        font-size: 20px;
+        padding: 1em 1.8em;
+        margin-top: 30px;
+    }
+}
+
+@media (min-width: 930px) {
+
+    .pagetitle {
+        font-size: 60px;
+        padding: 20px 15px;
+    }
+
+    .description {
+        font-size: 35px;
+        max-width: 700px;
+        margin-top: 30px;
+    }
+
+    .trading {
+        font-size: 35px;
+    }
+
+    .scannerpage {
+        max-width: 700px;
+        padding-top: 50px;
+    }
+
+    #camera {
+        min-width: 900px;
+        min-height: 300px;
+        border-width: 7px;
+    }
+
+    .c-button {
+        font-size: 20px;
+        padding: 1em 1.8em;
+        margin-top: 30px;
+    }
+
+    .scan-result {
+        font-size: 20px;
+        margin-top: 15px;
     }
 
 }
 
-.attendance-date {
-    text-align: center;
-    margin-top: -10px;
-    margin-bottom: 20px;
-    color: #203a38;
-    font-size: 14px;
-    font-family: var(--font-text);
+@media (min-width: 1441px) {
+    .pagetitle,
+    .pagetitlelist,
+    .admintitle,
+    .pagetitleschedule {
+        font-size: 48px;
+        padding: 20px 25px;
+        margin-top: 25px;
+    }
+
+    .class-page .tabs,
+    .admin-page .tabs {
+        max-width: 560px;
+        margin: 10px auto 0;
+        gap: 14px;
+        transform: none;
+        padding: 20px 20px;
+        margin-top: -20px;
+    }
+
+    .tab {
+        font-size: 18px;
+        padding: 14px 18px;
+    }
+
+    .class-page .student-list,
+    .admin-page .student-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        transform: none;
+    }
+
+    .student,
+    .admin-page .student {
+        font-size: 18px;
+        padding: 16px 18px;
+    }
+
+    .description {
+        font-size: 34px;
+        max-width: 700px;
+        margin-top: 30px;
+    }
+
+    .planningdescription {
+        font-size: 30px;
+        margin-top: 30px;
+    }
+
+    .eventinstructions {
+        font-size: 22px;
+        margin-top: 15px;
+    }
+
+    .calendar-wrap {
+        gap: 60px;
+        padding: 30px;
+        align-items: flex-start;
+    }
+
+    .calendar {
+        max-width: 600px;
+        width: 600px;
+        border-radius: 15px;
+    }
+
+    .month {
+        font-size: 25px;
+        padding: 18px 20px;
+    }
+
+    .month-nav {
+        font-size: 25px;
+    }
+
+    .weekdays div {
+        font-size: 20px;
+        padding: 14px 0;
+    }
+
+    .days div {
+        font-size: 20px;
+        padding: 20px;
+    }
+
+    .event-panel {
+        max-width: 500px;
+        width: 500px;
+        padding: 30px;
+        border-radius: 15px;
+    }
+
+    .event-panel h2 {
+        font-size: 25px;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+    }
+
+    #eventForm {
+        gap: 12px;
+        margin-top: 15px;
+    }
+
+    #eventForm label {
+        font-size: 18px;
+    }
+
+    #eventForm input,
+    #eventForm textarea {
+        font-size: 18px;
+        padding: 12px 14px;
+    }
+
+    #eventForm textarea {
+        min-height: 120px;
+    }
+
+    .save-btn {
+        font-size: 18px;
+        padding: 14px 18px;
+        margin-top: 10px;
+    }
+
+    .event-item {
+        font-size: 18px;
+        padding: 16px;
+        margin-bottom: 15px;
+    }
+
+    .event-item strong {
+        font-size: 20px;
+    }
+
+    .event-item small {
+        font-size: 16px;
+    }
 }

@@ -36,15 +36,17 @@
         </div>
     </div>
 
-    <main id="adminRecords" class="page admin-records" hidden>
+    <main id="adminRecords" class="page admin-records admin-page" hidden>
         <h2 class="records-heading">Tutor attendance</h2>
         <p id="attendanceDate" class="attendance-date"></p>
-
+    <div class="admin-tabs-container">
         <div class="tabs admin-tabs">
             <button type="button" class="tab active" onclick="setActiveTab(this); showAll()">All</button>
             <button type="button" class="tab" onclick="setActiveTab(this); showPresent()">Present</button>
             <button type="button" class="tab" onclick="setActiveTab(this); showAbsent()">Absent</button>
+            </div>
         </div>
+
         <ul class="student-list" id="adminStudentList">
             <li class="student" data-name="Jack Allen"><button type="button" class="student-name" onclick="toggleAttendance(this)">Jack Allen</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
             <li class="student" data-name="Liam Berryman"><button type="button" class="student-name" onclick="toggleAttendance(this)">Liam Berryman</button><span class="attendance-time"></span><div class="weekly-attendance"></div></li>
